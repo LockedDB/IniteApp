@@ -3,6 +3,7 @@ import { CustomText } from '@components/CustomText';
 import { Menu } from 'Assets/SVG';
 
 import { TopBar } from '@components/TopBar';
+import ProjectCard from 'Modules/Home/Components/ProjectCard/ProjectCard';
 import { TouchableOpacity, View } from 'react-native';
 import styles from './styles';
 
@@ -29,6 +30,9 @@ const HomeScreen = () => {
           leftComponent={<Title />}
           rightComponent={<MenuBar onPress={onMenuPressed} />}
         />
+      </View>
+      <View style={{ paddingHorizontal: 16 }}>
+        <ProjectCard />
       </View>
     </CustomSafeAreaView>
   );
