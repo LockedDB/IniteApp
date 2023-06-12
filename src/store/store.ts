@@ -1,9 +1,9 @@
-import {persistReducer} from 'redux-persist';
+import { persistReducer } from 'redux-persist';
 import createSagaMiddleware from 'redux-saga';
-import rootReducer from '../reducers/reducers';
+import rootReducer from '../Reducers/reducers';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import {Middleware, configureStore} from '@reduxjs/toolkit';
+import { Middleware, configureStore } from '@reduxjs/toolkit';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -27,7 +27,7 @@ if (__DEV__) {
 export const store = configureStore({
   reducer: persistedReducer,
   middleware: getDefaultMiddleware =>
-    getDefaultMiddleware({serializableCheck: false, thunk: false}).concat(
+    getDefaultMiddleware({ serializableCheck: false, thunk: false }).concat(
       middlewares,
     ),
 });
