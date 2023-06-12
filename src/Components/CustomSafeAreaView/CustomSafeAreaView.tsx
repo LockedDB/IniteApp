@@ -4,7 +4,7 @@ import styles from './styles';
 
 interface CustomSafeAreaViewProps extends ViewProps {}
 
-const CustomSafeAreaView = ({
+export const CustomSafeAreaView = ({
   children,
   ...props
 }: PropsWithChildren<CustomSafeAreaViewProps>) => {
@@ -14,5 +14,3 @@ const CustomSafeAreaView = ({
     </SafeAreaView>
   );
 };
-
-export default CustomSafeAreaView;
