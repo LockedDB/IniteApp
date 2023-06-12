@@ -1,9 +1,10 @@
 import { CustomSafeAreaView } from '@components/CustomSafeAreaView';
 import { CustomText } from '@components/CustomText';
-import { TopBar } from 'Components/TopBar';
-import { View } from 'react-native';
-import styles from './styles';
 import { Menu } from 'Assets/SVG';
+
+import { TopBar } from '@components/TopBar';
+import { TouchableOpacity, View } from 'react-native';
+import styles from './styles';
 
 const Title = () => (
   <CustomText fontStyle="black" style={styles.title}>
@@ -11,11 +12,23 @@ const Title = () => (
   </CustomText>
 );
 
+const MenuBar = ({ onPress }: { onPress: () => void }) => (
+  <TouchableOpacity hitSlop={20} onPress={onPress}>
+    <Menu />
+  </TouchableOpacity>
+);
+
 const HomeScreen = () => {
+  // TODO: Open navigation bar
+  const onMenuPressed = () => {};
+
   return (
     <CustomSafeAreaView>
       <View style={styles.topBarContainer}>
-        <TopBar leftComponent={<Title />} rightComponent={<Menu />} />
+        <TopBar
+          leftComponent={<Title />}
+          rightComponent={<MenuBar onPress={onMenuPressed} />}
+        />
       </View>
     </CustomSafeAreaView>
   );
