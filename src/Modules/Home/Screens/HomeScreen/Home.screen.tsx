@@ -5,18 +5,17 @@ import { View } from 'react-native';
 import styles from './styles';
 import { Menu } from 'Assets/SVG';
 
+const Title = () => (
+  <CustomText fontStyle="black" style={styles.title}>
+    Projects
+  </CustomText>
+);
+
 const HomeScreen = () => {
   return (
     <CustomSafeAreaView>
       <View style={styles.topBarContainer}>
-        <TopBar
-          leftComponent={
-            <CustomText fontStyle="black" style={styles.title}>
-              Projects
-            </CustomText>
-          }
-          rightComponent={<Menu />}
-        />
+        <TopBar leftComponent={<Title />} rightComponent={<Menu />} />
       </View>
     </CustomSafeAreaView>
   );
