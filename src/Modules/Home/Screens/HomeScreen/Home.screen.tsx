@@ -10,7 +10,11 @@ const HomeScreen = () => {
     <CustomSafeAreaView>
       <View style={styles.topBarContainer}>
         <TopBar
-          leftComponent={<CustomText>Projects</CustomText>}
+          leftComponent={
+            <CustomText fontStyle="black" style={styles.title}>
+              Projects
+            </CustomText>
+          }
           rightComponent={<Menu />}
         />
       </View>

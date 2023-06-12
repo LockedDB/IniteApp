@@ -6,4 +6,8 @@ export default StyleSheet.create({
     padding: 16,
     paddingBottom: 8,
   },
+  title: {
+    fontSize: 24,
+    lineHeight: 28,
+  },
 });
