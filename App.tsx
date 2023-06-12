@@ -5,14 +5,16 @@
  * @format
  */
 
-import React from 'react';
-import {SafeAreaView, StatusBar} from 'react-native';
+import React, { Fragment } from 'react';
+import { StatusBar } from 'react-native';
+import HomeScreen from './src/Modules/Home/Screens/HomeScreen/Home.screen';
 
 export const App = () => {
   return (
-    <SafeAreaView>
+    <Fragment>
       <StatusBar />
-    </SafeAreaView>
+      <HomeScreen />
+    </Fragment>
   );
 };
 
