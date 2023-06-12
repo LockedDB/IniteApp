@@ -1,23 +1,18 @@
 import React, { PropsWithChildren } from 'react';
-import { SafeAreaView, StyleSheet, ViewProps } from 'react-native';
+import { SafeAreaView, ViewProps } from 'react-native';
+import styles from './styles';
 
 interface CustomSafeAreaViewProps extends ViewProps {}
 
-const CustomSafeAreaView: React.FC<
-  PropsWithChildren<CustomSafeAreaViewProps>
-> = ({ children, ...props }) => {
+const CustomSafeAreaView = ({
+  children,
+  ...props
+}: PropsWithChildren<CustomSafeAreaViewProps>) => {
   return (
-    <SafeAreaView style={styles.container} {...props}>
+    <SafeAreaView style={styles.page} {...props}>
       {children}
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#000000',
-  },
-});
 
 export default CustomSafeAreaView;
