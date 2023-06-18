@@ -12,7 +12,7 @@ import HomeScreen from './src/Modules/Home/Screens/HomeScreen/Home.screen';
 export const App = () => {
   return (
     <Fragment>
-      <StatusBar />
+      <StatusBar barStyle="dark-content" hidden />
       <HomeScreen />
     </Fragment>
   );
