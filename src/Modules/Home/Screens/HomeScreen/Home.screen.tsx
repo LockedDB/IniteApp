@@ -1,3 +1,4 @@
+import { BlurModal, useBlurModal } from '@components/BlurModal';
 import { CustomSafeAreaView } from '@components/CustomSafeAreaView';
 import { CustomText } from '@components/CustomText';
 import { TopBar } from '@components/TopBar';
@@ -19,6 +20,7 @@ const MenuBar = ({ onPress }: { onPress: () => void }) => (
 );
 
 const HomeScreen = () => {
+  const { isModalVisible, onCloseModal, onOpenModal } = useBlurModal();
   // TODO: Open navigation bar
   const onMenuPressed = () => {};
 
@@ -48,7 +50,15 @@ const HomeScreen = () => {
         contentContainerStyle={styles.contentList}
       />
 
-      <ListFooter />
+      <ListFooter onPress={onOpenModal} />
+      <BlurModal isVisible={isModalVisible} onClose={onCloseModal}>
+        <View
+          style={{
+            height: 100,
+            width: '100%',
+            backgroundColor: 'white',
+          }}></View>
+      </BlurModal>
     </CustomSafeAreaView>
   );
 };
