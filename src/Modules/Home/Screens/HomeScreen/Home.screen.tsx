@@ -1,9 +1,10 @@
-import { BlurModal, useBlurModal } from '@components/BlurModal';
+import { useBlurModal } from '@components/BlurModal';
 import { CustomSafeAreaView } from '@components/CustomSafeAreaView';
 import { CustomText } from '@components/CustomText';
 import { TopBar } from '@components/TopBar';
 import { Menu } from 'Assets/SVG';
 import { ListFooter, ProjectCard } from 'Modules/Home/Components';
+import { AddProjectModal } from 'Modules/Home/Components/AddProjectModal';
 import { FlatList, TouchableOpacity, View } from 'react-native';
 import styles from './styles';
 
@@ -21,6 +22,7 @@ const MenuBar = ({ onPress }: { onPress: () => void }) => (
 
 const HomeScreen = () => {
   const { isModalVisible, onCloseModal, onOpenModal } = useBlurModal();
+
   // TODO: Open navigation bar
   const onMenuPressed = () => {};
 
@@ -51,14 +53,7 @@ const HomeScreen = () => {
       />
 
       <ListFooter onPress={onOpenModal} />
-      <BlurModal isVisible={isModalVisible} onClose={onCloseModal}>
-        <View
-          style={{
-            height: 100,
-            width: '100%',
-            backgroundColor: 'white',
-          }}></View>
-      </BlurModal>
+      <AddProjectModal isVisible={isModalVisible} onClose={onCloseModal} />
     </CustomSafeAreaView>
   );
 };
