@@ -35,9 +35,9 @@ export default StyleSheet.create({
   },
   button: {
     backgroundColor: White,
-    borderRadius: 100,
-    paddingHorizontal: 8,
-    paddingVertical: 4,
+    borderRadius: 8,
+    paddingHorizontal: 32,
+    paddingVertical: 8,
     alignItems: 'center',
     justifyContent: 'center',
   },

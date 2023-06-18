@@ -7,6 +7,14 @@ import React from 'react';
 import { Pressable, TextInput, TouchableOpacity, View } from 'react-native';
 import styles from './styles';
 
+const CreateButton = ({ onPress }: { onPress: () => void }) => (
+  <TouchableOpacity style={styles.button} onPress={onPress}>
+    <CustomText style={{ color: Black, fontSize: 14 }} fontStyle="medium">
+      Create
+    </CustomText>
+  </TouchableOpacity>
+);
+
 interface ModalProps extends BlurModalProps {}
 
 export const AddProjectModal = ({ ...props }: ModalProps) => {
@@ -45,11 +53,7 @@ export const AddProjectModal = ({ ...props }: ModalProps) => {
             <CategoryTag colorIndex={0}>+</CategoryTag>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.button} onPress={onPressCreate}>
-            <CustomText style={{ color: Black }} fontStyle="medium">
-              Create
-            </CustomText>
-          </TouchableOpacity>
+          <CreateButton onPress={onPressCreate} />
         </View>
       </View>
     </BlurModal>
