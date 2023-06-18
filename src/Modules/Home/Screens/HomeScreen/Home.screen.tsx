@@ -39,12 +39,12 @@ const HomeScreen = () => {
     <CustomSafeAreaView>
       <FlatList
         data={data}
-        renderItem={renderProjectCard}
-        keyExtractor={item => item.toString()}
         maxToRenderPerBatch={3}
+        stickyHeaderIndices={[0]}
+        renderItem={renderProjectCard}
         ListHeaderComponent={renderHeader}
         showsVerticalScrollIndicator={false}
-        stickyHeaderIndices={[0]}
+        keyExtractor={item => item.toString()}
         contentContainerStyle={styles.contentList}
       />
     </CustomSafeAreaView>
