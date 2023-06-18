@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import { Black } from '../../../../Utils/colors';
 
 export default StyleSheet.create({
   topBarContainer: {
@@ -9,5 +8,9 @@ export default StyleSheet.create({
   title: {
     fontSize: 24,
     lineHeight: 28,
+  },
+  list: {
+    paddingHorizontal: 16,
+    gap: 8,
   },
 });

@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   card: {
-    gap: 8,
+    gap: 4,
   },
   header: {
     flexDirection: 'row',

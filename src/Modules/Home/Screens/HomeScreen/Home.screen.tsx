@@ -31,7 +31,9 @@ const HomeScreen = () => {
           rightComponent={<MenuBar onPress={onMenuPressed} />}
         />
       </View>
-      <View style={{ paddingHorizontal: 16 }}>
+      <View style={styles.list}>
+        <ProjectCard />
+        <ProjectCard />
         <ProjectCard />
       </View>
     </CustomSafeAreaView>

@@ -18,7 +18,6 @@ const ProjectCard = () => {
     <View style={styles.card}>
       <View style={styles.topCard}>
         {/* header */}
-
         <View style={styles.header}>
           <View style={styles.tags}>
             <CategoryTag colorIndex={0}>Website</CategoryTag>
