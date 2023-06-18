@@ -1,3 +1,4 @@
+import { CategoryTag } from '@components/CategoryTag';
 import { CustomText } from '@components/CustomText';
 import { Divider } from '@components/Divider';
 import { View } from 'react-native';
@@ -6,11 +7,17 @@ import ProjectCardFooter from './ProjectCardFooter/ProjectCardFooter';
 import styles from './styles';
 
 const ProjectCard = () => {
+  // TODO: Add logic here
+
   return (
     <View style={styles.card}>
       <View style={styles.topCard}>
         {/* header */}
-        <View></View>
+        <View style={styles.tags}>
+          <CategoryTag colorIndex={0}>Website</CategoryTag>
+          <CategoryTag colorIndex={1}>App</CategoryTag>
+          <CategoryTag colorIndex={2}>Planning</CategoryTag>
+        </View>
 
         {/* body */}
         <CustomText fontStyle="bold" style={styles.title}>

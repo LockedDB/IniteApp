@@ -6,7 +6,7 @@ export type FontStyle = 'regular' | 'light' | 'bold' | 'black' | 'medium';
 
 const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
-interface CustomTextProps extends TextProps {
+export interface CustomTextProps extends TextProps {
   fontStyle?: string;
 }
 

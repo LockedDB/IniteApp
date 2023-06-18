@@ -5,6 +5,10 @@ export default StyleSheet.create({
   card: {
     gap: 8,
   },
+  tags: {
+    flexDirection: 'row',
+    gap: 8,
+  },
   topCard: {
     padding: 16,
     paddingBottom: 8,
