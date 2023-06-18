@@ -5,6 +5,11 @@ export default StyleSheet.create({
   card: {
     gap: 8,
   },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingBottom: 8,
+  },
   tags: {
     flexDirection: 'row',
     gap: 8,
