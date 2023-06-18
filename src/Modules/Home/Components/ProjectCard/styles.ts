@@ -3,6 +3,9 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   card: {
+    gap: 8,
+  },
+  topCard: {
     padding: 16,
     paddingBottom: 8,
     gap: 8,
