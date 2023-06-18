@@ -2,6 +2,7 @@ import { CustomSafeAreaView } from '@components/CustomSafeAreaView';
 import { CustomText } from '@components/CustomText';
 import { TopBar } from '@components/TopBar';
 import { Menu } from 'Assets/SVG';
+import { ListFooter } from 'Modules/Home/Components/ListFooter';
 import ProjectCard from 'Modules/Home/Components/ProjectCard/ProjectCard';
 import { FlatList, TouchableOpacity, View } from 'react-native';
 import styles from './styles';
@@ -47,6 +48,8 @@ const HomeScreen = () => {
         keyExtractor={item => item.toString()}
         contentContainerStyle={styles.contentList}
       />
+
+      <ListFooter />
     </CustomSafeAreaView>
   );
 };

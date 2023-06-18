@@ -13,5 +13,6 @@ export default StyleSheet.create({
   },
   contentList: {
     gap: 16,
+    paddingHorizontal: 8,
   },
 });
