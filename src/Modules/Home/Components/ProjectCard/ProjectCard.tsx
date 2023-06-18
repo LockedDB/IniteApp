@@ -7,7 +7,7 @@ import AddTopicButton from './AddTopicButton/AddTopicButton';
 import ProjectCardFooter from './ProjectCardFooter/ProjectCardFooter';
 import styles from './styles';
 
-const ProjectCard = () => {
+export const ProjectCard = () => {
   // TODO: Add logic here
 
   const onMoreVerticalPress = () => {
@@ -52,5 +52,3 @@ const ProjectCard = () => {
     </View>
   );
 };
-
-export default ProjectCard;

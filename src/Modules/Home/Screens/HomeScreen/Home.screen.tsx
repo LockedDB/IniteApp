@@ -2,8 +2,7 @@ import { CustomSafeAreaView } from '@components/CustomSafeAreaView';
 import { CustomText } from '@components/CustomText';
 import { TopBar } from '@components/TopBar';
 import { Menu } from 'Assets/SVG';
-import { ListFooter } from 'Modules/Home/Components/ListFooter';
-import ProjectCard from 'Modules/Home/Components/ProjectCard/ProjectCard';
+import { ListFooter, ProjectCard } from 'Modules/Home/Components';
 import { FlatList, TouchableOpacity, View } from 'react-native';
 import styles from './styles';
 
