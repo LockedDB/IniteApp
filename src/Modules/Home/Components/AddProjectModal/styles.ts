@@ -9,9 +9,7 @@ export default StyleSheet.create({
     padding: 16,
     backgroundColor: Gunmetal,
     borderRadius: 8,
-    gap: 8,
     width: '100%',
-    height: 148,
   },
   headerContainer: {
     flexDirection: 'row',
@@ -19,16 +17,16 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
   },
   projectNameInput: {
+    width: '80%',
     fontSize: 24,
     fontFamily: 'Roboto-Bold',
     color: White,
-    maxWidth: '80%',
   },
   descriptionInput: {
     fontSize: 14,
     fontFamily: 'Roboto-Regular',
     color: White,
-    height: 50,
+    height: 60,
   },
   categoryContainer: {
     flexDirection: 'row',

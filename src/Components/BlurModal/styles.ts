@@ -6,4 +6,7 @@ export default StyleSheet.create({
     justifyContent: 'center',
     height: '100%',
   },
+  blur: {
+    ...StyleSheet.absoluteFillObject,
+  },
 });
