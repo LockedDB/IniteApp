@@ -1,6 +1,6 @@
-import { Add } from 'Assets/SVG';
-import { TouchableOpacity, View } from 'react-native';
+import { View } from 'react-native';
 import styles from './styles';
+import { AddListButton } from '@components/AddListButton';
 
 interface ListFooterProps {
   onPress: () => void;
@@ -8,8 +8,6 @@ interface ListFooterProps {
 
 export const ListFooter = ({ onPress }: ListFooterProps) => (
   <View style={styles.footer}>
-    <TouchableOpacity style={styles.container} onPress={onPress}>
-      <Add />
-    </TouchableOpacity>
+    <AddListButton onPress={onPress} />
   </View>
 );

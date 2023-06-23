@@ -6,11 +6,4 @@ export default StyleSheet.create({
     backgroundColor: Black,
     padding: 8,
   },
-  container: {
-    borderRadius: 8,
-    paddingVertical: 16,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: EerieBlack,
-  },
 });

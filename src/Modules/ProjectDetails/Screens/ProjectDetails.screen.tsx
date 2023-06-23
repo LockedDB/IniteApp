@@ -13,6 +13,7 @@ import {
 import React from 'react';
 import { FlatList, TouchableOpacity, View } from 'react-native';
 import styles from './styles';
+import { AddListButton } from '@components/AddListButton';
 
 interface ListItem {
   id: string;
@@ -88,6 +89,8 @@ const ProjectDetailsScreen = (): React.ReactElement => {
         ListHeaderComponent={renderListHeader}
         stickyHeaderIndices={[0]}
       />
+
+      <AddListButton onPress={() => {}} />
     </CustomSafeAreaView>
   );
 };
