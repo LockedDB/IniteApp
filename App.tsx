@@ -5,15 +5,15 @@
  * @format
  */
 
+import ProjectDetailsScreen from 'Modules/ProjectDetails/Screens/ProjectDetails.screen';
 import React, { Fragment } from 'react';
 import { StatusBar } from 'react-native';
-import HomeScreen from './src/Modules/Home/Screens/HomeScreen/Home.screen';
 
 export const App = () => {
   return (
     <Fragment>
       <StatusBar barStyle="dark-content" hidden />
-      <HomeScreen />
+      <ProjectDetailsScreen />
     </Fragment>
   );
 };
