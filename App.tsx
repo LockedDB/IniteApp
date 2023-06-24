@@ -6,6 +6,7 @@
  */
 
 import ProjectDetailsScreen from 'Modules/ProjectDetails/Screens/ProjectDetails.screen';
+import { TopicDetailScreen } from 'Modules/TopicDetails/Screens/TopicDetails.screen';
 import React, { Fragment } from 'react';
 import { StatusBar } from 'react-native';
 
@@ -13,7 +14,7 @@ export const App = () => {
   return (
     <Fragment>
       <StatusBar barStyle="dark-content" hidden />
-      <ProjectDetailsScreen />
+      <TopicDetailScreen />
     </Fragment>
   );
 };

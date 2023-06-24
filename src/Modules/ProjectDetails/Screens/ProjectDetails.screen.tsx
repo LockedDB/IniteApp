@@ -3,17 +3,13 @@ import { CustomSafeAreaView } from '@components/CustomSafeAreaView';
 import { CustomText } from '@components/CustomText';
 import { Divider } from '@components/Divider';
 import { TopBar } from '@components/TopBar';
-import {
-  ArrowBack,
-  ArrowForward,
-  AttachFile,
-  ChatBubble,
-  MoreVertical,
-} from 'Assets/SVG';
+
+import { ArrowBack, ArrowForward, MoreVertical } from 'Assets/SVG';
 import React from 'react';
 import { FlatList, TouchableOpacity, View } from 'react-native';
 import styles from './styles';
 import { AddListButton } from '@components/AddListButton';
+import { ContentIndicators } from '@components/ContentIndicators';
 
 interface ListItem {
   id: string;
@@ -39,16 +35,7 @@ const ProjectDetailsScreen = (): React.ReactElement => {
         {item.title}
       </CustomText>
       <View style={[styles.row, styles.spacing]}>
-        <View>
-          <View style={[styles.row, styles.spacing]}>
-            <ChatBubble />
-            <CustomText>{item.chatBubbleCount}</CustomText>
-          </View>
-          <View style={[styles.row, styles.spacing]}>
-            <AttachFile />
-            <CustomText>{item.attachFileCount}</CustomText>
-          </View>
-        </View>
+        <ContentIndicators chatBubbleCount={1} attachFileCount={3} />
         <ArrowForward />
       </View>
     </TouchableOpacity>
