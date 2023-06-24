@@ -18,7 +18,7 @@ interface ListItem {
   attachFileCount: number;
 }
 
-const ProjectDetailsScreen = (): React.ReactElement => {
+export const ProjectDetailsScreen = (): React.ReactElement => {
   const data: ListItem[] = [
     {
       id: '1',
@@ -81,5 +81,3 @@ const ProjectDetailsScreen = (): React.ReactElement => {
     </CustomSafeAreaView>
   );
 };
-
-export default ProjectDetailsScreen;

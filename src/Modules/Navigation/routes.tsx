@@ -5,7 +5,7 @@ import {
   PROJECT_DETAILS_SCREEN,
   TOPICS_DETAILS_SCREEN,
 } from './paths';
-import ProjectDetailsScreen from 'Modules/ProjectDetails/Screens/ProjectDetails.screen';
+import { ProjectDetailsScreen } from 'Modules/ProjectDetails/Screens/ProjectDetails.screen';
 import { TopicDetailScreen } from 'Modules/TopicDetails/Screens/TopicDetails.screen';
 
 const AppStack = createNativeStackNavigator();
