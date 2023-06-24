@@ -20,7 +20,7 @@ const MenuBar = ({ onPress }: { onPress: () => void }) => (
   </TouchableOpacity>
 );
 
-const HomeScreen = () => {
+export const HomeScreen = () => {
   const { isModalVisible, onCloseModal, onOpenModal } = useBlurModal();
 
   // TODO: Open navigation bar
@@ -57,5 +57,3 @@ const HomeScreen = () => {
     </CustomSafeAreaView>
   );
 };
-
-export default HomeScreen;
