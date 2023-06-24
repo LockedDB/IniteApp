@@ -3,6 +3,8 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   container: {
+    margin: 16,
+    marginTop: 0,
     flexDirection: 'row',
     paddingHorizontal: 16,
     paddingVertical: 12,
