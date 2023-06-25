@@ -38,7 +38,9 @@ export const ProjectCard = () => {
         </View>
 
         {/* body */}
-        <TouchableOpacity onPress={onNavigateToTopicDetails}>
+        <TouchableOpacity
+          style={styles.gapping}
+          onPress={onNavigateToTopicDetails}>
           <CustomText fontStyle="bold" style={styles.title}>
             Pages “About” and “Careers”
           </CustomText>

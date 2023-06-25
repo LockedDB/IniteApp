@@ -34,4 +34,7 @@ export default StyleSheet.create({
   bullet: {
     color: White,
   },
+  gapping: {
+    gap: 8,
+  },
 });
