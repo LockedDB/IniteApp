@@ -2,6 +2,9 @@ import { Black, EerieBlack } from '@utils/colors';
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
+  page: {
+    padding: 8,
+  },
   header: {
     gap: 8,
     marginTop: 8,
