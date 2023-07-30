@@ -3,9 +3,11 @@ import { CategoryTag } from '@components/CategoryTag';
 import { CustomText } from '@components/CustomText';
 import { Black, White300 } from '@utils/colors';
 import { Close } from 'Assets/SVG';
-import React from 'react';
+import React, {useState} from 'react';
 import { Pressable, TextInput, TouchableOpacity, View } from 'react-native';
 import styles from './styles';
+import {useDispatch} from "react-redux";
+import {dispatchCreateProject} from "../../../Project/Redux/actions";
 
 const CreateButton = ({ onPress }: { onPress: () => void }) => (
   <TouchableOpacity style={styles.button} onPress={onPress}>
@@ -18,8 +20,12 @@ const CreateButton = ({ onPress }: { onPress: () => void }) => (
 interface ModalProps extends BlurModalProps {}
 
 export const AddProjectModal = ({ ...props }: ModalProps) => {
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const dispatch = useDispatch()
   const onPressCreate = () => {
     props.onClose();
+    dispatch(dispatchCreateProject.Request({name, description}));
   };
 
   return (
@@ -31,6 +37,8 @@ export const AddProjectModal = ({ ...props }: ModalProps) => {
             placeholderTextColor={White300}
             style={styles.projectNameInput}
             maxLength={20}
+            onChangeText={setName}
+            value={name}
           />
 
           <Pressable onPress={props.onClose}>
@@ -46,6 +54,8 @@ export const AddProjectModal = ({ ...props }: ModalProps) => {
           textAlignVertical="top"
           numberOfLines={2}
           maxLength={180}
+          onChangeText={setDescription}
+          value={description}
         />
 
         <View style={styles.categoryContainer}>

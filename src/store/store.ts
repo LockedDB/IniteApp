@@ -4,6 +4,7 @@ import rootReducer from '../Reducers/reducers';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { Middleware, configureStore } from '@reduxjs/toolkit';
+import rootSaga from "../Sagas/saga";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -31,3 +32,5 @@ export const store = configureStore({
       middlewares,
     ),
 });
+
+sagaMiddleware.run(rootSaga)
