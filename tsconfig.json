@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src",
     "paths": {
-      "@components/*": ["./Components/*"],
-      "@utils/*": ["./Utils/*"]
+      "@/*": [
+        "./src/*"
+      ]
     }
   },
   "extends": "@tsconfig/react-native/tsconfig.json"

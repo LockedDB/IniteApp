@@ -1,10 +1,10 @@
 import { persistReducer } from 'redux-persist';
 import createSagaMiddleware from 'redux-saga';
-import rootReducer from '../Reducers/reducers';
+import rootReducer from '@/reducers/reducers';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { Middleware, configureStore } from '@reduxjs/toolkit';
-import rootSaga from "../Sagas/saga";
+import { configureStore, Middleware } from '@reduxjs/toolkit';
+import rootSaga from '@/sagas/saga';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -33,4 +33,4 @@ export const store = configureStore({
     ),
 });
 
-sagaMiddleware.run(rootSaga)
+sagaMiddleware.run(rootSaga);

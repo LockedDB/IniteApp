@@ -1,8 +1,8 @@
 import { Provider } from 'react-redux';
-import { store } from '../Store/store';
+import { store } from '@/store/store';
 import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'react-native';
-import { AppNavigator } from 'Modules/Navigation/routes';
+import { AppNavigator } from '@/modules/Navigation/routes';
 
 export const ApplicationWithProviders = () => (
   <Provider store={store}>

@@ -1,0 +1,69 @@
+import { useFetchProjects } from '@/modules/Home/Screens/HomeScreen/hooks';
+import { useBlurModal } from '@/components/BlurModal';
+import { CustomText } from '@/components/CustomText';
+import styles from './styles';
+import { FlatList, RefreshControl, TouchableOpacity, View } from 'react-native';
+import { Menu } from '@/assets/SVG';
+import { ListFooter, ProjectCard } from '@/modules/Home/Components';
+import React from 'react';
+import { TopBar } from '@/components/TopBar';
+import { CustomSafeAreaView } from '@/components/CustomSafeAreaView';
+import { AddProjectModal } from '@/modules/Home/Components/AddProjectModal';
+
+const Title = () => (
+  <CustomText fontStyle="black" style={styles.title}>
+    Projects
+  </CustomText>
+);
+
+const MenuBar = ({ onPress }: { onPress: () => void }) => (
+  <TouchableOpacity hitSlop={20} onPress={onPress}>
+    <Menu />
+  </TouchableOpacity>
+);
+
+export const HomeScreen = () => {
+  const { isModalVisible, onCloseModal, onOpenModal } = useBlurModal();
+  const { projects, isLoading, isError, fetchProjects } = useFetchProjects();
+
+  // TODO: Open navigation bar
+  const onMenuPressed = () => {};
+
+  const data = [1, 2, 3]; // This should be replaced with your actual data
+
+  const renderProjectCard = ({ item }: { item: number }) => <ProjectCard />;
+
+  const renderHeader = () => (
+    <View style={styles.topBarContainer}>
+      <TopBar
+        leftComponent={<Title />}
+        rightComponent={<MenuBar onPress={onMenuPressed} />}
+      />
+    </View>
+  );
+
+  return (
+    <CustomSafeAreaView>
+      <FlatList
+        data={data}
+        maxToRenderPerBatch={3}
+        stickyHeaderIndices={[0]}
+        refreshControl={
+          <RefreshControl
+            refreshing={isLoading}
+            onRefresh={fetchProjects}
+            tintColor={'white'}
+          />
+        }
+        renderItem={renderProjectCard}
+        ListHeaderComponent={renderHeader}
+        showsVerticalScrollIndicator={false}
+        keyExtractor={item => item.toString()}
+        contentContainerStyle={styles.contentList}
+      />
+
+      <ListFooter onPress={onOpenModal} />
+      <AddProjectModal isVisible={isModalVisible} onClose={onCloseModal} />
+    </CustomSafeAreaView>
+  );
+};
