@@ -14,13 +14,17 @@ export default StyleSheet.create({
     flexDirection: 'row',
     gap: 8,
   },
-  topCard: {
+  container: {
+    flexDirection: 'row',
     padding: 16,
     paddingBottom: 8,
-    gap: 8,
     backgroundColor: EerieBlack,
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
+  },
+  topCard: {
+    width: '100%',
+    gap: 8,
   },
   title: {
     fontSize: 20,
@@ -30,6 +34,9 @@ export default StyleSheet.create({
     fontSize: 14,
     lineHeight: 21,
     color: White700,
+  },
+  moreButtons: {
+    marginLeft: 'auto',
   },
   bullet: {
     color: White,

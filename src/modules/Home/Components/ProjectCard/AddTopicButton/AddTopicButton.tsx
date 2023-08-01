@@ -61,6 +61,7 @@ const AddTopicButton = () => {
           <AnimatedTouchableOpacity
             entering={SlideInRight.springify().damping(15)}
             exiting={SlideOutRight}
+            hitSlop={40}
             onPress={onSubmit}>
             <CustomText style={styles.buttonText}>Save</CustomText>
           </AnimatedTouchableOpacity>

@@ -6,7 +6,7 @@ import { View } from 'react-native';
 import styles from './styles';
 
 interface CategoryTagProps extends CustomTextProps {
-  colorIndex: 0 | 1 | 2 | 3;
+  colorIndex: number;
 }
 
 const BackgroundColors = {

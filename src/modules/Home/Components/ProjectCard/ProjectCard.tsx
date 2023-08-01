@@ -1,7 +1,5 @@
-import { CategoryTag } from '@/components/CategoryTag';
 import { CustomText } from '@/components/CustomText';
 import { Divider } from '@/components/Divider';
-import { MoreVertical } from '@/assets/SVG';
 import { Button, TouchableOpacity, View } from 'react-native';
 import AddTopicButton from './AddTopicButton/AddTopicButton';
 import ProjectCardFooter from './ProjectCardFooter/ProjectCardFooter';
@@ -14,6 +12,8 @@ import { BottomSheet } from '@/components/BottomSheet/BottomSheet';
 import { Project } from '@/modules/Project/Models/project';
 import { dispatchDeleteProject } from '@/modules/Project/Redux/actions';
 import { useDispatch } from 'react-redux';
+import { MoreVertical } from '@/assets/SVG';
+import { CategoryTag } from '@/components/CategoryTag';
 
 interface ProjectCardProps {
   item: Project;
@@ -40,36 +40,42 @@ export const ProjectCard = ({ item }: ProjectCardProps) => {
 
   return (
     <View style={styles.card}>
-      <View style={styles.topCard}>
-        {/* header */}
-        <View style={styles.header}>
-          <View style={styles.tags}>
-            <CategoryTag colorIndex={0}>Website</CategoryTag>
-            <CategoryTag colorIndex={1}>App</CategoryTag>
-            <CategoryTag colorIndex={2}>Planning</CategoryTag>
-          </View>
-          <TouchableOpacity onPress={onMoreVerticalPress}>
-            <MoreVertical />
+      <View style={styles.container}>
+        <View style={styles.topCard}>
+          {/* body */}
+          {item.tags && (
+            <View style={styles.tags}>
+              {item.tags.map((tag, index) => (
+                <CategoryTag colorIndex={index}>{tag}</CategoryTag>
+              ))}
+            </View>
+          )}
+
+          <TouchableOpacity
+            style={styles.gapping}
+            onPress={onNavigateToTopicDetails}>
+            <CustomText fontStyle="bold" style={styles.title}>
+              {item.name}
+            </CustomText>
+            <CustomText style={styles.description}>
+              {item.description}
+            </CustomText>
+            <CustomText style={[styles.description, styles.bullet]}>
+              {`\u2022 Let’s talk about the kitchen!\n`}
+              {`\u2022 There was an issue with the delivery`}
+            </CustomText>
           </TouchableOpacity>
+
+          <Divider />
+
+          <AddTopicButton />
         </View>
 
-        {/* body */}
         <TouchableOpacity
-          style={styles.gapping}
-          onPress={onNavigateToTopicDetails}>
-          <CustomText fontStyle="bold" style={styles.title}>
-            {item.name}
-          </CustomText>
-          <CustomText style={styles.description}>{item.description}</CustomText>
-          <CustomText style={[styles.description, styles.bullet]}>
-            {`\u2022 Let’s talk about the kitchen!\n`}
-            {`\u2022 There was an issue with the delivery`}
-          </CustomText>
+          style={styles.moreButtons}
+          onPress={onMoreVerticalPress}>
+          <MoreVertical />
         </TouchableOpacity>
-
-        <Divider />
-
-        <AddTopicButton />
       </View>
 
       <BottomSheet isOpen={isOpen} onToggle={() => setOpen(!isOpen)}>
