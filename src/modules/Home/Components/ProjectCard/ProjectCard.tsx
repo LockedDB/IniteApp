@@ -11,8 +11,13 @@ import { PROJECT_DETAILS_SCREEN } from '@/modules/Navigation/paths';
 import { GenericNavigation } from '@/modules/Navigation/types';
 import { useState } from 'react';
 import { BottomSheet } from '@/components/BottomSheet/BottomSheet';
+import { Project } from '@/modules/Project/Models/project';
 
-export const ProjectCard = () => {
+interface ProjectCardProps {
+  item: Project;
+}
+
+export const ProjectCard = ({ item }: ProjectCardProps) => {
   const { push } = useNavigation<GenericNavigation>();
   const [isOpen, setOpen] = useState(false);
 
@@ -44,12 +49,9 @@ export const ProjectCard = () => {
           style={styles.gapping}
           onPress={onNavigateToTopicDetails}>
           <CustomText fontStyle="bold" style={styles.title}>
-            Pages “About” and “Careers”
+            {item.name}
           </CustomText>
-          <CustomText style={styles.description}>
-            All the details are in the file, I’m sure it will turn out cool!
-            Let’s do the exact opposite of the first concept.
-          </CustomText>
+          <CustomText style={styles.description}>{item.description}</CustomText>
           <CustomText style={[styles.description, styles.bullet]}>
             {`\u2022 Let’s talk about the kitchen!\n`}
             {`\u2022 There was an issue with the delivery`}

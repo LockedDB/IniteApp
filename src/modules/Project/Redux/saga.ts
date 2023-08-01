@@ -38,11 +38,11 @@ function* createProjectWorker({
 
 function* fetchProjectWorker() {
   try {
-    const userId: string = '1'; // yield select(userIdSelector)
+    const ownerId: string = '1'; // yield select(userIdSelector)
     const projectsCollectionRef = collection(firestoreDatabase, 'projects');
 
     // Create a query against the collection.
-    const q = query(projectsCollectionRef, where('userId', '==', userId));
+    const q = query(projectsCollectionRef, where('owner_id', '==', ownerId));
 
     const querySnapshot: QuerySnapshot = yield call(getDocs, q);
     const projects = querySnapshot.docs.map(
@@ -55,8 +55,8 @@ function* fetchProjectWorker() {
           participants: doc.data()?.participants,
           owner_id: doc.data()?.owner_id,
           attachments: {
-            messages: doc.data()?.attachments.messages,
-            files: doc.data()?.attachments.files,
+            messages: doc.data()?.attachments?.messages,
+            files: doc.data()?.attachments?.files,
           },
         } as Project),
     );

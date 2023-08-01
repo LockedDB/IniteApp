@@ -1,7 +1,12 @@
 import { useMountEffect } from '@/utils/utils';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { dispatchFetchProjects } from '@/modules/Project/Redux/actions';
 import { Project } from '@/modules/Project/Models/project';
+import {
+  isProjectsErrorSelector,
+  isProjectsLoadingSelector,
+  projectsSelector,
+} from '@/modules/Project/Redux/selectors';
 
 interface useFetchProjectsType {
   projects: Project[];
@@ -12,6 +17,9 @@ interface useFetchProjectsType {
 
 export const useFetchProjects = (): useFetchProjectsType => {
   const dispatch = useDispatch();
+  const projects = useSelector(projectsSelector);
+  const isLoading = useSelector(isProjectsLoadingSelector);
+  const isError = useSelector(isProjectsErrorSelector);
 
   const fetchProjects = () => {
     dispatch(dispatchFetchProjects.Request());
@@ -21,5 +29,10 @@ export const useFetchProjects = (): useFetchProjectsType => {
     fetchProjects();
   });
 
-  return { projects: [], isLoading: false, isError: false, fetchProjects };
+  return {
+    projects: projects || [],
+    isLoading: isLoading || false,
+    isError: isError || false,
+    fetchProjects,
+  };
 };

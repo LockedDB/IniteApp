@@ -11,4 +11,5 @@ const rootReducer = combineReducers({
   projects: projectSlice.reducer,
 });
 
+export type StoreState = ReturnType<typeof rootReducer>;
 export default rootReducer;

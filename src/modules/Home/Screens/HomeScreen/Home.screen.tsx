@@ -9,6 +9,7 @@ import React from 'react';
 import { TopBar } from '@/components/TopBar';
 import { CustomSafeAreaView } from '@/components/CustomSafeAreaView';
 import { AddProjectModal } from '@/modules/Home/Components/AddProjectModal';
+import { Project } from '@/modules/Project/Models/project';
 
 const Title = () => (
   <CustomText fontStyle="black" style={styles.title}>
@@ -29,9 +30,9 @@ export const HomeScreen = () => {
   // TODO: Open navigation bar
   const onMenuPressed = () => {};
 
-  const data = [1, 2, 3]; // This should be replaced with your actual data
-
-  const renderProjectCard = ({ item }: { item: number }) => <ProjectCard />;
+  const renderProjectCard = ({ item }: { item: Project }) => (
+    <ProjectCard item={item} />
+  );
 
   const renderHeader = () => (
     <View style={styles.topBarContainer}>
@@ -45,7 +46,7 @@ export const HomeScreen = () => {
   return (
     <CustomSafeAreaView>
       <FlatList
-        data={data}
+        data={projects}
         maxToRenderPerBatch={3}
         stickyHeaderIndices={[0]}
         refreshControl={
