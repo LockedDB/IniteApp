@@ -2,20 +2,13 @@ import { useFetchProjects } from '@/modules/Home/Screens/HomeScreen/hooks';
 import { useBlurModal } from '@/components/BlurModal';
 import { CustomText } from '@/components/CustomText';
 import styles from './styles';
-import {
-  Button,
-  FlatList,
-  RefreshControl,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { FlatList, RefreshControl, TouchableOpacity, View } from 'react-native';
 import { Menu } from '@/assets/SVG';
 import { ListFooter, ProjectCard } from '@/modules/Home/Components';
-import React, { useState } from 'react';
+import React from 'react';
 import { TopBar } from '@/components/TopBar';
 import { CustomSafeAreaView } from '@/components/CustomSafeAreaView';
 import { AddProjectModal } from '@/modules/Home/Components/AddProjectModal';
-import { BottomSheet } from '@/components/BottomSheet/BottomSheet';
 
 const Title = () => (
   <CustomText fontStyle="black" style={styles.title}>
@@ -30,7 +23,6 @@ const MenuBar = ({ onPress }: { onPress: () => void }) => (
 );
 
 export const HomeScreen = () => {
-  const [isOpen, setOpen] = useState(false);
   const { isModalVisible, onCloseModal, onOpenModal } = useBlurModal();
   const { projects, isLoading, isError, fetchProjects } = useFetchProjects();
 
@@ -70,13 +62,8 @@ export const HomeScreen = () => {
         contentContainerStyle={styles.contentList}
       />
 
-      {/* TODO: Change this */}
-      <ListFooter onPress={() => setOpen(!isOpen)} />
+      <ListFooter onPress={onOpenModal} />
       <AddProjectModal isVisible={isModalVisible} onClose={onCloseModal} />
-      <BottomSheet isOpen={isOpen} onToggle={() => setOpen(!isOpen)}>
-        <Button title="Edit" />
-        <Button title="Remove" />
-      </BottomSheet>
     </CustomSafeAreaView>
   );
 };

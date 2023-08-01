@@ -14,6 +14,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { HEIGHT, OVERDRAG } from '@/components/BottomSheet/consts';
+import { Portal } from '@gorhom/portal';
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
@@ -56,7 +57,7 @@ export const BottomSheet = ({
   if (!isOpen) return null;
 
   return (
-    <>
+    <Portal>
       <AnimatedPressable
         style={styles.backdrop}
         entering={FadeIn}
@@ -71,6 +72,6 @@ export const BottomSheet = ({
           {children}
         </Animated.View>
       </GestureDetector>
-    </>
+    </Portal>
   );
 };

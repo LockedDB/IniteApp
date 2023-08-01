@@ -2,24 +2,26 @@ import { CategoryTag } from '@/components/CategoryTag';
 import { CustomText } from '@/components/CustomText';
 import { Divider } from '@/components/Divider';
 import { MoreVertical } from '@/assets/SVG';
-import { TouchableOpacity, View } from 'react-native';
+import { Button, TouchableOpacity, View } from 'react-native';
 import AddTopicButton from './AddTopicButton/AddTopicButton';
 import ProjectCardFooter from './ProjectCardFooter/ProjectCardFooter';
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
 import { PROJECT_DETAILS_SCREEN } from '@/modules/Navigation/paths';
 import { GenericNavigation } from '@/modules/Navigation/types';
+import { useState } from 'react';
+import { BottomSheet } from '@/components/BottomSheet/BottomSheet';
 
 export const ProjectCard = () => {
-  // TODO: Add logic here
   const { push } = useNavigation<GenericNavigation>();
+  const [isOpen, setOpen] = useState(false);
 
   const onNavigateToTopicDetails = () => {
     push(PROJECT_DETAILS_SCREEN, { id: '1' });
   };
 
   const onMoreVerticalPress = () => {
-    // TODO: Open menu
+    setOpen(!isOpen);
   };
 
   return (
@@ -58,6 +60,11 @@ export const ProjectCard = () => {
 
         <AddTopicButton />
       </View>
+
+      <BottomSheet isOpen={isOpen} onToggle={() => setOpen(!isOpen)}>
+        <Button title="Edit" />
+        <Button title="Remove" />
+      </BottomSheet>
 
       {/* Footer */}
       <ProjectCardFooter />
