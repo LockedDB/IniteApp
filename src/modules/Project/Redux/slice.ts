@@ -32,7 +32,7 @@ export const projectSlice = createSlice({
     builder.addCase(dispatchFetchProjects.Success, (state, { payload }) => {
       state.type = RemoteDataType.Success;
 
-      if (payload.length !== 0) {
+      if (payload) {
         state.projects = payload;
       }
     });

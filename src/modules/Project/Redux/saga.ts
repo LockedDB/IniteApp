@@ -48,6 +48,7 @@ function* fetchProjectWorker() {
     const projects = querySnapshot.docs.map(
       doc =>
         ({
+          id: doc.id,
           name: doc.data()?.name,
           description: doc.data()?.description,
           tags: doc.data()?.tags,
