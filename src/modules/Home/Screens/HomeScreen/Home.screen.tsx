@@ -59,7 +59,7 @@ export const HomeScreen = () => {
         renderItem={renderProjectCard}
         ListHeaderComponent={renderHeader}
         showsVerticalScrollIndicator={false}
-        keyExtractor={item => item.toString()}
+        keyExtractor={item => item.id}
         contentContainerStyle={styles.contentList}
       />
 
