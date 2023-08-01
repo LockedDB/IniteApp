@@ -15,4 +15,5 @@ export interface Project {
 export interface CreateProjectRequest {
   name: string;
   description: string;
+  owner_id: string;
 }

@@ -12,3 +12,9 @@ export const dispatchFetchProjects = createAsyncActions<
   string,
   void
 >('@PROJECT/FETCH_PROJECTS');
+
+export const dispatchDeleteProject = createAsyncActions<
+  void,
+  string,
+  { projectId: string }
+>('@PROJECT/DELETE_PROJECT');

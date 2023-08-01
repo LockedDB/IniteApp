@@ -25,7 +25,9 @@ export const AddProjectModal = ({ ...props }: ModalProps) => {
   const dispatch = useDispatch();
   const onPressCreate = () => {
     props.onClose();
-    dispatch(dispatchCreateProject.Request({ name, description }));
+    dispatch(
+      dispatchCreateProject.Request({ name, description, owner_id: '1' }),
+    );
   };
 
   return (

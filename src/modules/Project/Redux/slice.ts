@@ -1,5 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { dispatchCreateProject, dispatchFetchProjects } from './actions';
+import {
+  dispatchCreateProject,
+  dispatchDeleteProject,
+  dispatchFetchProjects,
+} from './actions';
 import { Project } from '@/modules/Project/Models/project';
 import { RemoteDataType } from '@/utils/services';
 
@@ -38,6 +42,23 @@ export const projectSlice = createSlice({
     });
 
     builder.addCase(dispatchFetchProjects.Error, (state, { payload }) => {
+      state.type = RemoteDataType.Error;
+      state.error = payload;
+    });
+
+    builder.addCase(dispatchDeleteProject.Request, state => {
+      state.type = RemoteDataType.Loading;
+    });
+
+    builder.addCase(dispatchDeleteProject.Success, (state, { payload }) => {
+      state.type = RemoteDataType.Success;
+
+      if (payload) {
+        state.projects = payload;
+      }
+    });
+
+    builder.addCase(dispatchDeleteProject.Error, (state, { payload }) => {
       state.type = RemoteDataType.Error;
       state.error = payload;
     });

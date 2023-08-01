@@ -12,6 +12,8 @@ import { GenericNavigation } from '@/modules/Navigation/types';
 import { useState } from 'react';
 import { BottomSheet } from '@/components/BottomSheet/BottomSheet';
 import { Project } from '@/modules/Project/Models/project';
+import { dispatchDeleteProject } from '@/modules/Project/Redux/actions';
+import { useDispatch } from 'react-redux';
 
 interface ProjectCardProps {
   item: Project;
@@ -19,6 +21,7 @@ interface ProjectCardProps {
 
 export const ProjectCard = ({ item }: ProjectCardProps) => {
   const { push } = useNavigation<GenericNavigation>();
+  const dispatch = useDispatch();
   const [isOpen, setOpen] = useState(false);
 
   const onNavigateToTopicDetails = () => {
@@ -65,7 +68,12 @@ export const ProjectCard = ({ item }: ProjectCardProps) => {
 
       <BottomSheet isOpen={isOpen} onToggle={() => setOpen(!isOpen)}>
         <Button title="Edit" />
-        <Button title="Remove" />
+        <Button
+          title="Remove"
+          onPress={() =>
+            dispatch(dispatchDeleteProject.Request({ projectId: item.id }))
+          }
+        />
       </BottomSheet>
 
       {/* Footer */}

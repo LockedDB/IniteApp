@@ -1,17 +1,37 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { addDoc, collection, getDocs, query, where } from 'firebase/firestore';
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  query,
+  where,
+} from 'firebase/firestore';
 import { PayloadAction } from '@reduxjs/toolkit';
 
 import { firestoreDatabase } from '../../../../firebaseConfig';
 import { CreateProjectRequest, Project } from '../Models/project';
-import { dispatchCreateProject, dispatchFetchProjects } from './actions';
+import {
+  dispatchCreateProject,
+  dispatchDeleteProject,
+  dispatchFetchProjects,
+} from './actions';
 import firebase from 'firebase/compat';
 import { getErrorMessage } from '@/utils/utils';
 import QuerySnapshot = firebase.firestore.QuerySnapshot;
 
 export function* watchProjectCreationRequest() {
   yield takeLatest(dispatchCreateProject.Request, createProjectWorker);
-  yield takeLatest(dispatchFetchProjects.Request, fetchProjectWorker);
+  yield takeLatest(
+    [
+      dispatchFetchProjects.Request,
+      dispatchCreateProject.Success,
+      dispatchDeleteProject.Success,
+    ],
+    fetchProjectWorker,
+  );
+  yield takeLatest(dispatchDeleteProject.Request, deleteProjectWorker);
 }
 
 // Define a separate function for adding a project
@@ -65,5 +85,19 @@ function* fetchProjectWorker() {
     yield put(dispatchFetchProjects.Success(projects));
   } catch (error) {
     yield put(dispatchFetchProjects.Error(getErrorMessage(error)));
+  }
+}
+
+function* deleteProjectWorker({
+  payload: { projectId },
+}: PayloadAction<{ projectId: string }>) {
+  try {
+    const projectDocRef = doc(firestoreDatabase, `projects/${projectId}`);
+
+    yield call(deleteDoc, projectDocRef);
+
+    yield put(dispatchDeleteProject.Success());
+  } catch (error: unknown) {
+    yield put(dispatchDeleteProject.Error(getErrorMessage(error)));
   }
 }
