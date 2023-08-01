@@ -1,16 +1,11 @@
-import { BlurView } from '@react-native-community/blur';
 import { Close } from '@/assets/SVG';
-import React, { Fragment, PropsWithChildren } from 'react';
-import {
-  Modal,
-  ModalProps,
-  Pressable,
-  TouchableWithoutFeedback,
-  View,
-  ViewStyle,
-} from 'react-native';
+import React, { PropsWithChildren } from 'react';
+import { Modal, ModalProps, Pressable, View, ViewStyle } from 'react-native';
 
 import styles from './styles';
+import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
+
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 export interface BlurModalProps extends ModalProps {
   isVisible: boolean;
@@ -27,11 +22,14 @@ export const BlurModal = ({
   withCloseButton = true,
 }: PropsWithChildren<BlurModalProps>) => {
   return (
-    <Fragment>
-      {!!isVisible && (
-        <TouchableWithoutFeedback onPress={onClose}>
-          <BlurView blurAmount={5} style={styles.blur} />
-        </TouchableWithoutFeedback>
+    <>
+      {isVisible && (
+        <AnimatedPressable
+          style={styles.blur}
+          entering={FadeIn}
+          exiting={FadeOut}
+          onPress={onClose}
+        />
       )}
       <Modal animationType="slide" transparent={true} visible={isVisible}>
         <View style={[styles.modalContent, style]}>
@@ -43,6 +41,6 @@ export const BlurModal = ({
           {children}
         </View>
       </Modal>
-    </Fragment>
+    </>
   );
 };

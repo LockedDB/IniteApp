@@ -28,6 +28,12 @@ export const ProjectCard = ({ item }: ProjectCardProps) => {
     push(PROJECT_DETAILS_SCREEN, { id: '1' });
   };
 
+  const onEdit = () => {};
+
+  const onRemove = () => {
+    dispatch(dispatchDeleteProject.Request({ projectId: item.id }));
+  };
+
   const onMoreVerticalPress = () => {
     setOpen(!isOpen);
   };
@@ -67,13 +73,8 @@ export const ProjectCard = ({ item }: ProjectCardProps) => {
       </View>
 
       <BottomSheet isOpen={isOpen} onToggle={() => setOpen(!isOpen)}>
-        <Button title="Edit" />
-        <Button
-          title="Remove"
-          onPress={() =>
-            dispatch(dispatchDeleteProject.Request({ projectId: item.id }))
-          }
-        />
+        <Button title="Edit" onPress={onEdit} />
+        <Button title="Remove" onPress={onRemove} />
       </BottomSheet>
 
       {/* Footer */}
