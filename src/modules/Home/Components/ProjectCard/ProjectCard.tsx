@@ -14,6 +14,7 @@ import { dispatchDeleteProject } from '@/modules/Project/Redux/actions';
 import { useDispatch } from 'react-redux';
 import { MoreVertical } from '@/assets/SVG';
 import { CategoryTag } from '@/components/CategoryTag';
+import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 
 interface ProjectCardProps {
   item: Project;
@@ -39,7 +40,7 @@ export const ProjectCard = ({ item }: ProjectCardProps) => {
   };
 
   return (
-    <View style={styles.card}>
+    <Animated.View entering={FadeIn} exiting={FadeOut} style={styles.card}>
       <View style={styles.container}>
         <View style={styles.topCard}>
           {/* body */}
@@ -85,6 +86,6 @@ export const ProjectCard = ({ item }: ProjectCardProps) => {
 
       {/* Footer */}
       <ProjectCardFooter />
-    </View>
+    </Animated.View>
   );
 };

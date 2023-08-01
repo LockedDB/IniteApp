@@ -10,6 +10,7 @@ import { TopBar } from '@/components/TopBar';
 import { CustomSafeAreaView } from '@/components/CustomSafeAreaView';
 import { AddProjectModal } from '@/modules/Home/Components/AddProjectModal';
 import { Project } from '@/modules/Project/Models/project';
+import LoadingComponent from '@/components/LoadingComponent/LoadingComponent';
 
 const Title = () => (
   <CustomText fontStyle="black" style={styles.title}>
@@ -65,6 +66,8 @@ export const HomeScreen = () => {
 
       <ListFooter onPress={onOpenModal} />
       <AddProjectModal isVisible={isModalVisible} onClose={onCloseModal} />
+
+      <LoadingComponent isLoading={isLoading} />
     </CustomSafeAreaView>
   );
 };
