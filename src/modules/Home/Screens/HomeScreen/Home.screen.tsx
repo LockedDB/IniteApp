@@ -11,6 +11,8 @@ import { CustomSafeAreaView } from '@/components/CustomSafeAreaView';
 import { AddProjectModal } from '@/modules/Home/Components/AddProjectModal';
 import { Project } from '@/modules/Project/Models/project';
 import LoadingComponent from '@/components/LoadingComponent/LoadingComponent';
+import { DrawerActions, useNavigation } from '@react-navigation/native';
+import { GenericNavigation } from '@/modules/Navigation/types';
 
 const Title = () => (
   <CustomText fontStyle="black" style={styles.title}>
@@ -25,11 +27,13 @@ const MenuBar = ({ onPress }: { onPress: () => void }) => (
 );
 
 export const HomeScreen = () => {
+  const navigation = useNavigation<GenericNavigation>();
   const { isModalVisible, onCloseModal, onOpenModal } = useBlurModal();
   const { projects, isLoading, isError, fetchProjects } = useFetchProjects();
 
-  // TODO: Open navigation bar
-  const onMenuPressed = () => {};
+  const onMenuPressed = () => {
+    navigation.dispatch(DrawerActions.openDrawer());
+  };
 
   const renderProjectCard = ({ item }: { item: Project }) => (
     <ProjectCard item={item} />
