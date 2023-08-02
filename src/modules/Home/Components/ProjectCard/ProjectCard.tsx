@@ -20,6 +20,9 @@ interface ProjectCardProps {
   item: Project;
 }
 
+const AnimatedTouchableOpacity =
+  Animated.createAnimatedComponent(TouchableOpacity);
+
 export const ProjectCard = ({ item }: ProjectCardProps) => {
   const { push } = useNavigation<GenericNavigation>();
   const dispatch = useDispatch();
@@ -40,7 +43,11 @@ export const ProjectCard = ({ item }: ProjectCardProps) => {
   };
 
   return (
-    <Animated.View entering={FadeIn} exiting={FadeOut} style={styles.card}>
+    <AnimatedTouchableOpacity
+      entering={FadeIn}
+      exiting={FadeOut}
+      onPress={onNavigateToTopicDetails}
+      style={styles.card}>
       <View style={styles.container}>
         <View style={styles.topCard}>
           {/* body */}
@@ -52,9 +59,7 @@ export const ProjectCard = ({ item }: ProjectCardProps) => {
             </View>
           )}
 
-          <TouchableOpacity
-            style={styles.gapping}
-            onPress={onNavigateToTopicDetails}>
+          <View style={styles.gapping}>
             <CustomText fontStyle="bold" style={styles.title}>
               {item.name}
             </CustomText>
@@ -65,7 +70,7 @@ export const ProjectCard = ({ item }: ProjectCardProps) => {
               {`\u2022 Let’s talk about the kitchen!\n`}
               {`\u2022 There was an issue with the delivery`}
             </CustomText>
-          </TouchableOpacity>
+          </View>
 
           <Divider />
 
@@ -86,6 +91,6 @@ export const ProjectCard = ({ item }: ProjectCardProps) => {
 
       {/* Footer */}
       <ProjectCardFooter />
-    </Animated.View>
+    </AnimatedTouchableOpacity>
   );
 };
