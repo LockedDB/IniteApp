@@ -11,7 +11,7 @@ import {
 import { PayloadAction } from '@reduxjs/toolkit';
 
 import { firestoreDatabase } from '../../../../firebaseConfig';
-import { CreateProjectRequest, Project } from '../Models/project';
+import { CreateProjectRequest, Project } from '@/Models/project';
 import {
   dispatchCreateProject,
   dispatchDeleteProject,

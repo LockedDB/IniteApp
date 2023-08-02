@@ -9,7 +9,7 @@ import React from 'react';
 import { TopBar } from '@/components/TopBar';
 import { CustomSafeAreaView } from '@/components/CustomSafeAreaView';
 import { AddProjectModal } from '@/modules/Home/Components/AddProjectModal';
-import { Project } from '@/modules/Project/Models/project';
+import { Project } from '@/Models/project';
 import LoadingComponent from '@/components/LoadingComponent/LoadingComponent';
 import { DrawerActions, useNavigation } from '@react-navigation/native';
 import { GenericNavigation } from '@/modules/Navigation/types';

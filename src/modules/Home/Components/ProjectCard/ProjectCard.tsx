@@ -9,7 +9,7 @@ import { PROJECT_DETAILS_SCREEN } from '@/modules/Navigation/paths';
 import { GenericNavigation } from '@/modules/Navigation/types';
 import { useState } from 'react';
 import { BottomSheet } from '@/components/BottomSheet/BottomSheet';
-import { Project } from '@/modules/Project/Models/project';
+import { Project } from '@/Models/project';
 import { dispatchDeleteProject } from '@/modules/Project/Redux/actions';
 import { useDispatch } from 'react-redux';
 import { MoreVertical } from '@/assets/SVG';

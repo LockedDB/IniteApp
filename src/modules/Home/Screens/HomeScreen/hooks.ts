@@ -1,7 +1,7 @@
 import { useMountEffect } from '@/utils/utils';
 import { useDispatch, useSelector } from 'react-redux';
 import { dispatchFetchProjects } from '@/modules/Project/Redux/actions';
-import { Project } from '@/modules/Project/Models/project';
+import { Project } from '@/Models/project';
 import {
   isProjectsErrorSelector,
   isProjectsLoadingSelector,

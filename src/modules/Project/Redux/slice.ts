@@ -4,7 +4,7 @@ import {
   dispatchDeleteProject,
   dispatchFetchProjects,
 } from './actions';
-import { Project } from '@/modules/Project/Models/project';
+import { Project } from '@/Models/project';
 import { RemoteDataType } from '@/utils/services';
 
 export const projectSlice = createSlice({

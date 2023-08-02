@@ -1,5 +1,5 @@
 import { createAsyncActions } from '@/utils/utils';
-import { CreateProjectRequest, Project } from '../Models/project';
+import { CreateProjectRequest, Project } from '@/Models/project';
 
 export const dispatchCreateProject = createAsyncActions<
   undefined,
