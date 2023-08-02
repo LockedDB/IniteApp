@@ -11,10 +11,12 @@ import { useState } from 'react';
 import { BottomSheet } from '@/components/BottomSheet/BottomSheet';
 import { Project } from '@/Models/project';
 import { dispatchDeleteProject } from '@/modules/Project/Redux/actions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { MoreVertical } from '@/assets/SVG';
 import { CategoryTag } from '@/components/CategoryTag';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
+import { getTopicByProjectId } from '@/modules/Topic/Redux/selectors';
+import { StoreState } from '@/reducers/reducers';
 
 interface ProjectCardProps {
   item: Project;
@@ -27,6 +29,9 @@ export const ProjectCard = ({ item }: ProjectCardProps) => {
   const { push } = useNavigation<GenericNavigation>();
   const dispatch = useDispatch();
   const [isOpen, setOpen] = useState(false);
+  const topics = useSelector((state: StoreState) =>
+    getTopicByProjectId(state, item.id),
+  );
 
   const onNavigateToTopicDetails = () => {
     push(PROJECT_DETAILS_SCREEN, { id: '1' });
@@ -66,10 +71,12 @@ export const ProjectCard = ({ item }: ProjectCardProps) => {
             <CustomText style={styles.description}>
               {item.description}
             </CustomText>
-            <CustomText style={[styles.description, styles.bullet]}>
-              {`\u2022 Let’s talk about the kitchen!\n`}
-              {`\u2022 There was an issue with the delivery`}
-            </CustomText>
+
+            {topics.map(({ id, topicName }) => (
+              <CustomText key={id} style={[styles.description, styles.bullet]}>
+                {`\u2022 ${topicName}\n`}
+              </CustomText>
+            ))}
           </View>
 
           <Divider />

@@ -19,6 +19,7 @@ import {
 } from './actions';
 import firebase from 'firebase/compat';
 import { getErrorMessage } from '@/utils/utils';
+import { dispatchFetchTopics } from '@/modules/Topic/Redux/actions';
 import QuerySnapshot = firebase.firestore.QuerySnapshot;
 
 export function* watchProjectCreationRequest() {
@@ -83,6 +84,13 @@ function* fetchProjectWorker() {
     );
 
     yield put(dispatchFetchProjects.Success(projects));
+
+    // The second we receive the project data, call the topics for each project
+    yield put(
+      dispatchFetchTopics.Request(
+        projects.flatMap(({ participants }) => participants),
+      ),
+    );
   } catch (error) {
     yield put(dispatchFetchProjects.Error(getErrorMessage(error)));
   }

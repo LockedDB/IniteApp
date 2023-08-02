@@ -1,23 +1,28 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, getDocs, query, where } from 'firebase/firestore';
 import { PayloadAction } from '@reduxjs/toolkit';
 
 import { firestoreDatabase } from '../../../../firebaseConfig';
 import { getErrorMessage } from '@/utils/utils';
-import { dispatchCreateTopic } from '@/modules/Topic/Redux/actions';
-import { CreateTopicRequestParams } from '@/Models/topic';
+import {
+  dispatchCreateTopic,
+  dispatchFetchTopics,
+} from '@/modules/Topic/Redux/actions';
+import { CreateTopicRequestParams, Topic } from '@/Models/topic';
+import firebase from 'firebase/compat';
+import QuerySnapshot = firebase.firestore.QuerySnapshot;
 
 export function* watchTopicSaga() {
   yield takeLatest(dispatchCreateTopic.Request, createTopicWorker);
-  /*yield takeLatest(
-                                      [
-                                          dispatchFetchProjects.Request,
-                                          dispatchCreateProject.Success,
-                                          dispatchDeleteProject.Success,
-                                      ],
-                                      fetchProjectWorker,
-                                  );
-                                  yield takeLatest(dispatchDeleteProject.Request, deleteProjectWorker);*/
+  yield takeLatest(
+    [
+      dispatchFetchTopics.Request,
+      /*dispatchCreateProject.Success,
+            dispatchDeleteProject.Success,*/
+    ],
+    fetchTopicWorker,
+  );
+  /* yield takeLatest(dispatchDeleteProject.Request, deleteProjectWorker);*/
 }
 
 function* createTopicWorker({
@@ -52,37 +57,41 @@ function* createTopicWorker({
   }
 }
 
-/*function* fetchProjectWorker() {
-    try {
-        const ownerId: string = '1'; // yield select(userIdSelector)
-        const projectsCollectionRef = collection(firestoreDatabase, 'projects');
+function* fetchTopicWorker() {
+  try {
+    const uid: string = '1'; // yield select(userIdSelector)
+    const topicsCollectionRef = collection(firestoreDatabase, 'topics');
 
-        // Create a query against the collection.
-        const q = query(projectsCollectionRef, where('owner_id', '==', ownerId));
+    // Create a query against the collection.
+    const q = query(topicsCollectionRef, where('createdBy', '==', uid));
 
-        const querySnapshot: QuerySnapshot = yield call(getDocs, q);
-        const projects = querySnapshot.docs.map(
-            doc =>
-                ({
-                    id: doc.id,
-                    name: doc.data()?.name,
-                    description: doc.data()?.description,
-                    tags: doc.data()?.tags,
-                    topics: doc.data()?.topics,
-                    participants: doc.data()?.participants,
-                    owner_id: doc.data()?.owner_id,
-                    attachments: {
-                        messages: doc.data()?.attachments?.messages,
-                        files: doc.data()?.attachments?.files,
-                    },
-                } as Project),
-        );
+    const querySnapshot: QuerySnapshot = yield call(getDocs, q);
+    const topics = querySnapshot.docs.map(
+      doc =>
+        ({
+          id: doc.id,
+          projectId: doc.data()?.projectId,
+          topicName: doc.data()?.topicName,
+          members: doc.data()?.members,
+          nAttachments: doc.data()?.nAttachments,
+          nMessages: doc.data()?.nMessages,
+          createdAt: doc.data()?.createdAt,
+          createdBy: doc.data()?.createdBy,
+          recentMessage: {
+            messageText: doc.data()?.recentMessage?.messageText,
+            readBy: {
+              sentAt: doc.data()?.recentMessage?.readBy?.sentAt,
+              sentBy: doc.data()?.recentMessage?.readBy?.sentBy,
+            },
+          },
+        } as Topic),
+    );
 
-        yield put(dispatchFetchProjects.Success(projects));
-    } catch (error) {
-        yield put(dispatchFetchProjects.Error(getErrorMessage(error)));
-    }
-}*/
+    yield put(dispatchFetchTopics.Success(topics));
+  } catch (error) {
+    yield put(dispatchFetchTopics.Error(getErrorMessage(error)));
+  }
+}
 
 /*
 function* deleteProjectWorker({
