@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import {
   dispatchCreateProject,
   dispatchDeleteProject,
@@ -16,51 +16,43 @@ export const projectSlice = createSlice({
   },
   reducers: {},
   extraReducers: builder => {
-    builder.addCase(dispatchCreateProject.Request, state => {
-      state.type = RemoteDataType.Loading;
-    });
+    builder.addCase(dispatchFetchProjects.Success, (state, { payload }) => ({
+      ...state,
+      projects: payload ?? undefined,
+      type: RemoteDataType.Success,
+    }));
 
-    builder.addCase(dispatchCreateProject.Success, (state, { payload }) => {
-      state.type = RemoteDataType.Success;
-    });
+    builder.addMatcher(
+      isAnyOf(dispatchCreateProject.Success, dispatchDeleteProject.Success),
+      state => ({
+        ...state,
+        type: RemoteDataType.Success,
+      }),
+    );
 
-    builder.addCase(dispatchCreateProject.Error, (state, { payload }) => {
-      state.type = RemoteDataType.Error;
-      state.error = payload;
-    });
+    builder.addMatcher(
+      isAnyOf(
+        dispatchCreateProject.Request,
+        dispatchFetchProjects.Request,
+        dispatchDeleteProject.Request,
+      ),
+      state => ({
+        ...state,
+        type: RemoteDataType.Loading,
+      }),
+    );
 
-    builder.addCase(dispatchFetchProjects.Request, state => {
-      state.type = RemoteDataType.Loading;
-    });
-
-    builder.addCase(dispatchFetchProjects.Success, (state, { payload }) => {
-      state.type = RemoteDataType.Success;
-
-      if (payload) {
-        state.projects = payload;
-      }
-    });
-
-    builder.addCase(dispatchFetchProjects.Error, (state, { payload }) => {
-      state.type = RemoteDataType.Error;
-      state.error = payload;
-    });
-
-    builder.addCase(dispatchDeleteProject.Request, state => {
-      state.type = RemoteDataType.Loading;
-    });
-
-    builder.addCase(dispatchDeleteProject.Success, (state, { payload }) => {
-      state.type = RemoteDataType.Success;
-
-      if (payload) {
-        state.projects = payload;
-      }
-    });
-
-    builder.addCase(dispatchDeleteProject.Error, (state, { payload }) => {
-      state.type = RemoteDataType.Error;
-      state.error = payload;
-    });
+    builder.addMatcher(
+      isAnyOf(
+        dispatchCreateProject.Error,
+        dispatchFetchProjects.Error,
+        dispatchDeleteProject.Error,
+      ),
+      (state, { payload }) => ({
+        ...state,
+        type: RemoteDataType.Error,
+        error: payload,
+      }),
+    );
   },
 });
