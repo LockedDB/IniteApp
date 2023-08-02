@@ -17,6 +17,7 @@ import { CategoryTag } from '@/components/CategoryTag';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { getTopicByProjectId } from '@/modules/Topic/Redux/selectors';
 import { StoreState } from '@/reducers/reducers';
+import { TopicNameList } from './TopicNameList/TopicNameList';
 
 interface ProjectCardProps {
   item: Project;
@@ -68,17 +69,16 @@ export const ProjectCard = ({ item }: ProjectCardProps) => {
             <CustomText fontStyle="bold" style={styles.title}>
               {item.name}
             </CustomText>
-            <CustomText style={styles.description}>
-              {item.description}
-            </CustomText>
+            {item.description && (
+              <CustomText style={styles.description}>
+                {item.description}
+              </CustomText>
+            )}
 
-            <CustomText style={[styles.description, styles.bullet]}>
-              {topics
-                .slice(0, 3)
-                .map(({ topicName }) => `\u2022 ${topicName}\n`)}
-
-              {topics.length > 3 && '...'}
-            </CustomText>
+            <TopicNameList
+              topics={topics}
+              line={({ topicName }) => `\u2022 ${topicName}\n`}
+            />
           </View>
 
           <Divider />

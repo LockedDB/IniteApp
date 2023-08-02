@@ -8,10 +8,11 @@ import {
   dispatchCreateTopic,
   dispatchFetchTopics,
 } from '@/modules/Topic/Redux/actions';
-import { CreateTopicRequestParams, Topic } from '@/Models/topic';
+import { CreateTopicRequestParams } from '@/Models/topic';
 import firebase from 'firebase/compat';
 import { getProjectsParticipants } from '@/modules/Project/Redux/selectors';
 import QuerySnapshot = firebase.firestore.QuerySnapshot;
+import DocumentData = firebase.firestore.DocumentData;
 
 export function* watchTopicSaga() {
   yield takeLatest(dispatchCreateTopic.Request, createTopicWorker);
@@ -19,7 +20,7 @@ export function* watchTopicSaga() {
     [
       dispatchFetchTopics.Request,
       /*dispatchCreateProject.Success,
-                  dispatchDeleteProject.Success,*/
+                        dispatchDeleteProject.Success,*/
     ],
     fetchTopicWorker,
   );
@@ -70,26 +71,26 @@ function* fetchTopicWorker() {
     const q = query(topicsCollectionRef, where('createdBy', '==', uid));
 
     const querySnapshot: QuerySnapshot = yield call(getDocs, q);
-    const topics = querySnapshot.docs.map(
-      doc =>
-        ({
-          id: doc.id,
-          projectId: doc.data()?.projectId,
-          topicName: doc.data()?.topicName,
-          members: doc.data()?.members,
-          nAttachments: doc.data()?.nAttachments,
-          nMessages: doc.data()?.nMessages,
-          createdAt: doc.data()?.createdAt,
-          createdBy: doc.data()?.createdBy,
-          recentMessage: {
-            messageText: doc.data()?.recentMessage?.messageText,
-            readBy: {
-              sentAt: doc.data()?.recentMessage?.readBy?.sentAt,
-              sentBy: doc.data()?.recentMessage?.readBy?.sentBy,
-            },
+    const topics = querySnapshot.docs.map(doc => {
+      const data: DocumentData | undefined = doc.data();
+      return {
+        id: doc.id,
+        projectId: data?.projectId,
+        topicName: data?.topicName,
+        members: data?.members,
+        nAttachments: data?.nAttachments,
+        nMessages: data?.nMessages,
+        createdAt: data?.createdAt,
+        createdBy: data?.createdBy,
+        recentMessage: {
+          messageText: data?.recentMessage?.messageText,
+          readBy: {
+            sentAt: data?.recentMessage?.readBy?.sentAt,
+            sentBy: data?.recentMessage?.readBy?.sentBy,
           },
-        } as Topic),
-    );
+        },
+      };
+    });
 
     yield put(dispatchFetchTopics.Success(topics));
   } catch (error) {
