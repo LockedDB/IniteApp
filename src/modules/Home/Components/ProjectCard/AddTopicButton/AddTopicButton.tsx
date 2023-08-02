@@ -10,12 +10,20 @@ import Animated, {
   SlideInRight,
   SlideOutRight,
 } from 'react-native-reanimated';
+import { useDispatch } from 'react-redux';
+import { dispatchCreateTopic } from '@/modules/Topic/Redux/actions';
 
 const AnimatedTouchableOpacity =
   Animated.createAnimatedComponent(TouchableOpacity);
 
-const AddTopicButton = () => {
+interface Props {
+  projectId: string;
+}
+
+const AddTopicButton = ({ projectId }: Props) => {
+  const dispatch = useDispatch();
   const [isInput, setIsInput] = useState(false);
+  const [topicName, setTopicName] = useState('');
 
   const onPress = () => {
     setIsInput(true);
@@ -26,7 +34,7 @@ const AddTopicButton = () => {
   };
 
   const onSubmit = () => {
-    // TODO: Add topic functionality
+    dispatch(dispatchCreateTopic.Request({ projectId, topicName }));
     onInputBlur();
   };
 
@@ -52,6 +60,7 @@ const AddTopicButton = () => {
               placeholder="Add Topic"
               onBlur={onInputBlur}
               returnKeyType="done"
+              onChangeText={value => setTopicName(value)}
               onSubmitEditing={onSubmit}
               style={styles.buttonText}
               placeholderTextColor={White700}

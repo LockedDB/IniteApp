@@ -1,6 +1,7 @@
 import {combineReducers} from '@reduxjs/toolkit';
 import {projectSlice} from '@/modules/Project/Redux/slice';
 import authReducer from '@/store/authentication/authReducer';
+import {topicsSlice} from '@/modules/Topic/Redux/slice';
 
 /**
  * The root reducer is the single point where all the reducers are combined,
@@ -9,6 +10,7 @@ import authReducer from '@/store/authentication/authReducer';
 const rootReducer = combineReducers({
   authentication: authReducer,
   projects: projectSlice.reducer,
+  topics: topicsSlice.reducer,
 });
 
 export type StoreState = ReturnType<typeof rootReducer>;

@@ -74,7 +74,7 @@ export const ProjectCard = ({ item }: ProjectCardProps) => {
 
           <Divider />
 
-          <AddTopicButton />
+          <AddTopicButton projectId={item.id} />
         </View>
 
         <TouchableOpacity
