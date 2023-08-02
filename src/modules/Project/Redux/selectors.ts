@@ -18,3 +18,8 @@ export const isProjectsErrorSelector = createSelector(
   stateSelector,
   ({ type }) => type === RemoteDataType.Error,
 );
+
+export const getProjectsParticipants = createSelector(
+  stateSelector,
+  ({ projects }) => projects.flatMap(({ participants }) => participants),
+);

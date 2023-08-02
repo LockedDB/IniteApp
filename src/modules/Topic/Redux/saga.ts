@@ -1,4 +1,4 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { addDoc, collection, getDocs, query, where } from 'firebase/firestore';
 import { PayloadAction } from '@reduxjs/toolkit';
 
@@ -10,6 +10,7 @@ import {
 } from '@/modules/Topic/Redux/actions';
 import { CreateTopicRequestParams, Topic } from '@/Models/topic';
 import firebase from 'firebase/compat';
+import { getProjectsParticipants } from '@/modules/Project/Redux/selectors';
 import QuerySnapshot = firebase.firestore.QuerySnapshot;
 
 export function* watchTopicSaga() {
@@ -18,7 +19,7 @@ export function* watchTopicSaga() {
     [
       dispatchFetchTopics.Request,
       /*dispatchCreateProject.Success,
-            dispatchDeleteProject.Success,*/
+                  dispatchDeleteProject.Success,*/
     ],
     fetchTopicWorker,
   );
@@ -52,6 +53,9 @@ function* createTopicWorker({
     yield call(addDoc, topicsCollectionRef, topic);
 
     yield put(dispatchCreateTopic.Success());
+
+    const participants: string[] = yield select(getProjectsParticipants);
+    yield put(dispatchFetchTopics.Request(participants));
   } catch (error) {
     yield put(dispatchCreateTopic.Error(getErrorMessage(error)));
   }

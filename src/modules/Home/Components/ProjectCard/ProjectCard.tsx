@@ -72,11 +72,13 @@ export const ProjectCard = ({ item }: ProjectCardProps) => {
               {item.description}
             </CustomText>
 
-            {topics.map(({ id, topicName }) => (
-              <CustomText key={id} style={[styles.description, styles.bullet]}>
-                {`\u2022 ${topicName}\n`}
-              </CustomText>
-            ))}
+            <CustomText style={[styles.description, styles.bullet]}>
+              {topics
+                .slice(0, 3)
+                .map(({ topicName }) => `\u2022 ${topicName}\n`)}
+
+              {topics.length > 3 && '...'}
+            </CustomText>
           </View>
 
           <Divider />
