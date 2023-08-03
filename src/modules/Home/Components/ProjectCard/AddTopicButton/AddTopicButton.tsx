@@ -34,8 +34,10 @@ const AddTopicButton = ({ projectId }: Props) => {
   };
 
   const onSubmit = () => {
-    dispatch(dispatchCreateTopic.Request({ projectId, topicName }));
     onInputBlur();
+
+    if (!topicName) return;
+    dispatch(dispatchCreateTopic.Request({ projectId, topicName }));
   };
 
   return (

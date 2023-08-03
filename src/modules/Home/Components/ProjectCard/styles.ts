@@ -35,6 +35,7 @@ export default StyleSheet.create({
     color: White700,
   },
   moreButtons: {
+    height: 24,
     marginLeft: 'auto',
   },
   bullet: {
