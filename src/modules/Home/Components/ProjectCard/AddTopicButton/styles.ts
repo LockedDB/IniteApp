@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
   container: {
     width: '100%',
-    padding: 8,
+    padding: 16,
   },
   touchable: {
     flex: 1,

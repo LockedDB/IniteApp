@@ -17,14 +17,13 @@ export default StyleSheet.create({
   container: {
     flexDirection: 'row',
     padding: 16,
-    paddingBottom: 8,
+    paddingBottom: 0,
     backgroundColor: EerieBlack,
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
   },
   topCard: {
     width: '100%',
-    gap: 8,
   },
   title: {
     fontSize: 20,
