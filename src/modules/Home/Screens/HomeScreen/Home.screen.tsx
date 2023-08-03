@@ -2,7 +2,7 @@ import { useFetchProjects } from '@/modules/Home/Screens/HomeScreen/hooks';
 import { useBlurModal } from '@/components/BlurModal';
 import { CustomText } from '@/components/CustomText';
 import styles from './styles';
-import { FlatList, RefreshControl, TouchableOpacity, View } from 'react-native';
+import { FlatList, TouchableOpacity, View } from 'react-native';
 import { Menu } from '@/assets/SVG';
 import { ListFooter, ProjectCard } from '@/modules/Home/Components';
 import React from 'react';
@@ -35,7 +35,7 @@ export const HomeScreen = () => {
     navigation.dispatch(DrawerActions.openDrawer());
   };
 
-  const renderProjectCard = ({ item }: { item: Project }) => (
+  const renderItem = ({ item }: { item: Project }) => (
     <ProjectCard item={item} />
   );
 
@@ -54,14 +54,7 @@ export const HomeScreen = () => {
         data={projects}
         maxToRenderPerBatch={3}
         stickyHeaderIndices={[0]}
-        refreshControl={
-          <RefreshControl
-            refreshing={isLoading}
-            onRefresh={fetchProjects}
-            tintColor={'white'}
-          />
-        }
-        renderItem={renderProjectCard}
+        renderItem={renderItem}
         ListHeaderComponent={renderHeader}
         showsVerticalScrollIndicator={false}
         keyExtractor={item => item.id}

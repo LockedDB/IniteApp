@@ -9,13 +9,17 @@ import {
 import { ProjectDetailsScreen } from '@/modules/ProjectDetails/Screens/ProjectDetails.screen';
 import { TopicDetailScreen } from '@/modules/TopicDetails/Screens/TopicDetails.screen';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { Black } from '@/utils/colors';
 
 const Drawer = createDrawerNavigator();
 
 export const DrawerNavigator = () => (
   <Drawer.Navigator
     initialRouteName={HOME_SCREEN}
-    screenOptions={{ headerShown: false }}>
+    screenOptions={{
+      headerShown: false,
+      sceneContainerStyle: { backgroundColor: Black },
+    }}>
     <Drawer.Screen name={HOME_SCREEN} component={HomeScreen} />
   </Drawer.Navigator>
 );
@@ -25,7 +29,10 @@ const AppStack = createNativeStackNavigator();
 export const AppNavigator = () => (
   <AppStack.Navigator
     initialRouteName={DRAWER_NAVIGATOR}
-    screenOptions={{ headerShown: false }}>
+    screenOptions={{
+      headerShown: false,
+      contentStyle: { backgroundColor: Black },
+    }}>
     <AppStack.Screen name={DRAWER_NAVIGATOR} component={DrawerNavigator} />
     <AppStack.Screen
       name={PROJECT_DETAILS_SCREEN}
