@@ -3,8 +3,6 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   topBarContainer: {
-    padding: 16,
-    paddingBottom: 8,
     backgroundColor: Black,
   },
   title: {
@@ -13,6 +11,6 @@ export default StyleSheet.create({
   },
   contentList: {
     gap: 16,
-    paddingHorizontal: 8,
+    paddingHorizontal: 16,
   },
 });

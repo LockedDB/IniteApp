@@ -26,20 +26,14 @@ const MenuBar = ({ onPress }: { onPress: () => void }) => (
   </TouchableOpacity>
 );
 
-export const HomeScreen = () => {
+const Header = () => {
   const navigation = useNavigation<GenericNavigation>();
-  const { isModalVisible, onCloseModal, onOpenModal } = useBlurModal();
-  const { projects, isLoading, isError, fetchProjects } = useFetchProjects();
 
   const onMenuPressed = () => {
     navigation.dispatch(DrawerActions.openDrawer());
   };
 
-  const renderItem = ({ item }: { item: Project }) => (
-    <ProjectCard item={item} />
-  );
-
-  const renderHeader = () => (
+  return (
     <View style={styles.topBarContainer}>
       <TopBar
         leftComponent={<Title />}
@@ -47,6 +41,13 @@ export const HomeScreen = () => {
       />
     </View>
   );
+};
+
+const renderItem = ({ item }: { item: Project }) => <ProjectCard item={item} />;
+
+export const HomeScreen = () => {
+  const { isModalVisible, onCloseModal, onOpenModal } = useBlurModal();
+  const { projects, isLoading, isError, fetchProjects } = useFetchProjects();
 
   return (
     <CustomSafeAreaView>
@@ -55,7 +56,7 @@ export const HomeScreen = () => {
         maxToRenderPerBatch={3}
         stickyHeaderIndices={[0]}
         renderItem={renderItem}
-        ListHeaderComponent={renderHeader}
+        ListHeaderComponent={Header}
         showsVerticalScrollIndicator={false}
         keyExtractor={item => item.id}
         contentContainerStyle={styles.contentList}

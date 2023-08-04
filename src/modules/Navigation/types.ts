@@ -4,6 +4,7 @@ import {
   TOPICS_DETAILS_SCREEN,
 } from './paths';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RouteProp } from '@react-navigation/native';
 
 export type ScreenList = {
   [HOME_SCREEN]: undefined;
@@ -15,5 +16,10 @@ export type ScreenListKeys = keyof ScreenList;
 
 export type ScreenNavigationType<T extends ScreenListKeys = ScreenListKeys> =
   NativeStackNavigationProp<ScreenList, T>;
+
+export type ScreenRouteType<S extends ScreenListKeys> = RouteProp<
+  ScreenList,
+  S
+>;
 
 export type GenericNavigation = ScreenNavigationType;

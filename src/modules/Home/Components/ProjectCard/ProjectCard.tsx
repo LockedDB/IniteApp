@@ -13,11 +13,11 @@ import { Project } from '@/Models/project';
 import { dispatchDeleteProject } from '@/modules/Project/Redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { MoreVertical } from '@/assets/SVG';
-import { CategoryTag } from '@/components/CategoryTag';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { getTopicByProjectId } from '@/modules/Topic/Redux/selectors';
 import { StoreState } from '@/reducers/reducers';
 import { TopicNameList } from './TopicNameList/TopicNameList';
+import { TagList } from '@/components/TagList/TagList';
 
 interface ProjectCardProps {
   item: Project;
@@ -35,7 +35,7 @@ export const ProjectCard = ({ item }: ProjectCardProps) => {
   );
 
   const onNavigateToTopicDetails = () => {
-    push(PROJECT_DETAILS_SCREEN, { id: '1' });
+    push(PROJECT_DETAILS_SCREEN, { id: item.id });
   };
 
   const onEdit = () => {};
@@ -56,14 +56,7 @@ export const ProjectCard = ({ item }: ProjectCardProps) => {
       style={styles.card}>
       <View style={styles.container}>
         <View style={styles.topCard}>
-          {/* body */}
-          {item.tags && (
-            <View style={styles.tags}>
-              {item.tags.map((tag, index) => (
-                <CategoryTag colorIndex={index}>{tag}</CategoryTag>
-              ))}
-            </View>
-          )}
+          <TagList tags={item.tags} />
 
           <View style={styles.gapping}>
             <CustomText fontStyle="bold" style={styles.title}>

@@ -6,22 +6,25 @@ import { TOPICS_DETAILS_SCREEN } from '@/modules/Navigation/paths';
 import { GenericNavigation } from '@/modules/Navigation/types';
 import { TouchableOpacity, View } from 'react-native';
 import styles from '../Screens/styles';
-import { TopicListItem } from '../types';
+import { Topic } from '@/Models/topic';
 
-export const TopicRow = ({ item }: { item: TopicListItem }) => {
+export const TopicRow = ({ item }: { item: Topic }) => {
   const { push } = useNavigation<GenericNavigation>();
 
   const onPress = () => {
-    push(TOPICS_DETAILS_SCREEN, { id: '1' });
+    push(TOPICS_DETAILS_SCREEN, { id: item.id ?? '1' });
   };
 
   return (
     <TouchableOpacity onPress={onPress} style={[styles.item, styles.row]}>
       <CustomText style={styles.rowTitle} fontStyle="bold">
-        {item.title}
+        {item.topicName}
       </CustomText>
       <View style={[styles.row, styles.spacing]}>
-        <ContentIndicators chatBubbleCount={1} attachFileCount={3} />
+        <ContentIndicators
+          chatBubbleCount={item.nMessages}
+          attachFileCount={item.nAttachments}
+        />
         <ArrowForward />
       </View>
     </TouchableOpacity>

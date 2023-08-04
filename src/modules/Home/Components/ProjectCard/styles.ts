@@ -10,10 +10,6 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     paddingBottom: 8,
   },
-  tags: {
-    flexDirection: 'row',
-    gap: 8,
-  },
   container: {
     flexDirection: 'row',
     padding: 16,
