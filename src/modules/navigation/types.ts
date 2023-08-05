@@ -1,12 +1,19 @@
 import {
   HOME_SCREEN,
   LOGIN_SCREEN,
+  NEW_USER_PROFILE_SCREEN,
   PROJECT_DETAILS_SCREEN,
   REGISTER_SCREEN,
   TOPICS_DETAILS_SCREEN,
+  WELCOME_SCREEN,
 } from './paths';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RouteProp } from '@react-navigation/native';
+import {
+  createNavigationContainerRef,
+  RouteProp,
+} from '@react-navigation/native';
+
+export const navigationRef = createNavigationContainerRef();
 
 export type ScreenList = {
   [HOME_SCREEN]: undefined;
@@ -14,6 +21,8 @@ export type ScreenList = {
   [TOPICS_DETAILS_SCREEN]: { id: string };
   [LOGIN_SCREEN]: undefined;
   [REGISTER_SCREEN]: undefined;
+  [NEW_USER_PROFILE_SCREEN]: undefined;
+  [WELCOME_SCREEN]: undefined;
 };
 
 export type ScreenListKeys = keyof ScreenList;

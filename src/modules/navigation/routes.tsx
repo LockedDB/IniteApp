@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   selectIsAuthLoading,
   selectIsUserLoggedIn,
-} from '@/modules/authentication_flow/redux/selectors';
+} from '@/modules/authentication_flow/redux/auth/selectors';
 import LoadingComponent from '@/components/LoadingComponent/LoadingComponent';
 import { useMountEffect } from '@/utils/utils';
-import { initializeApp } from '@/modules/authentication_flow/redux/slice';
+import { initializeApp } from '@/modules/authentication_flow/redux/auth/slice';
 
 export const Routes = () => {
   const dispatch = useDispatch();

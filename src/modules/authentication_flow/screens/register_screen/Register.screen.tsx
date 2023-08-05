@@ -3,7 +3,7 @@ import { TextInput, TouchableOpacity, View } from 'react-native';
 import React, { useState } from 'react';
 import { CustomText } from '@/components/CustomText';
 import { useDispatch } from 'react-redux';
-import { registerRequest } from '@/modules/authentication_flow/redux/slice';
+import { registerRequest } from '@/modules/authentication_flow/redux/auth/slice';
 import styles from './styles';
 
 export const RegisterScreen = () => {

@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { DrawerContentScrollView } from '@react-navigation/drawer';
-import { logout } from '@/modules/authentication_flow/redux/slice';
+import { logout } from '@/modules/authentication_flow/redux/auth/slice';
 
 export const CustomDrawerContent = (props: any) => {
   const dispatch = useDispatch();

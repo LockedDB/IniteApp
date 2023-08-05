@@ -6,12 +6,13 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import styles from './styles';
 import { PortalProvider } from '@gorhom/portal';
 import { Routes } from '@/modules/navigation/routes';
+import { navigationRef } from '@/modules/navigation/types';
 
 export const ApplicationWithProviders = () => (
   <GestureHandlerRootView style={styles.gestureHandler}>
     <PortalProvider>
       <Provider store={store}>
-        <NavigationContainer>
+        <NavigationContainer ref={navigationRef}>
           <StatusBar barStyle="dark-content" hidden />
           <Routes />
         </NavigationContainer>

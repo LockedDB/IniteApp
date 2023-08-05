@@ -5,10 +5,13 @@ import {
   signOut,
 } from 'firebase/auth';
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { firebaseAuthentication as auth } from '../../../../firebaseConfig';
+import { firebaseAuthentication as auth } from '../../../../../firebaseConfig';
 import { getErrorMessage } from '@/utils/utils';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import firebase from 'firebase/compat';
+import { dispatchNavigateActionSaga } from '@/sagas/helpers';
+import { StackActions } from '@react-navigation/native';
+import { NEW_USER_PROFILE_SCREEN } from '@/modules/navigation/paths';
 import UserCredential = firebase.auth.UserCredential;
 
 interface Credentials {
@@ -19,6 +22,7 @@ interface Credentials {
 interface AuthState {
   authenticated: boolean;
   loading: boolean;
+  registerLoading: boolean;
   error: string | null;
 }
 
@@ -26,6 +30,8 @@ const initialState: AuthState = {
   authenticated: false,
   loading: false,
   error: null,
+  /** This loading solely exists so the auth loading is not triggered and the navigation container is available*/
+  registerLoading: false,
 };
 
 const authSlice = createSlice({
@@ -49,15 +55,14 @@ const authSlice = createSlice({
       state.error = action.payload;
     },
     registerRequest: (state, action: PayloadAction<Credentials>) => {
-      state.loading = true;
+      state.registerLoading = true;
       state.error = null;
     },
     registerSuccess: state => {
-      state.loading = false;
-      state.authenticated = true;
+      state.registerLoading = false;
     },
     registerFailure: (state, action: PayloadAction<string>) => {
-      state.loading = false;
+      state.registerLoading = false;
       state.error = action.payload;
     },
     logout: state => {
@@ -116,6 +121,12 @@ function* registerSaga(action: PayloadAction<Credentials>) {
     );
 
     yield call(saveUserTokenToAsyncStorate, userCredential);
+
+    yield call(
+      dispatchNavigateActionSaga,
+      StackActions.push(NEW_USER_PROFILE_SCREEN),
+    );
+
     yield put(registerSuccess());
   } catch (error) {
     yield put(registerFailure(getErrorMessage(error)));
