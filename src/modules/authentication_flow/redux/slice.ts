@@ -98,11 +98,7 @@ function* loginSaga(action: PayloadAction<Credentials>) {
       password,
     );
 
-    if (userCredential.user === null)
-      throw Error('loginSaga: user credentials === null');
-
-    // Save the user information or token
-    yield AsyncStorage.setItem('userToken', userCredential.user.refreshToken);
+    yield call(saveUserTokenToAsyncStorate, userCredential);
     yield put(loginSuccess());
   } catch (error) {
     yield put(loginFailure(getErrorMessage(error)));
@@ -119,11 +115,7 @@ function* registerSaga(action: PayloadAction<Credentials>) {
       password,
     );
 
-    if (userCredential.user === null)
-      throw Error('register saga: user credentials === null');
-
-    // Save the user information or token
-    yield AsyncStorage.setItem('userToken', userCredential.user.refreshToken);
+    yield call(saveUserTokenToAsyncStorate, userCredential);
     yield put(registerSuccess());
   } catch (error) {
     yield put(registerFailure(getErrorMessage(error)));
@@ -134,6 +126,14 @@ function* logoutSaga() {
   yield call(signOut, auth);
   yield AsyncStorage.removeItem('userToken');
   yield put(logout());
+}
+
+function* saveUserTokenToAsyncStorate(userCredential: UserCredential) {
+  if (userCredential.user === null)
+    throw Error('register saga: user credentials === null');
+
+  // Save the user information or token
+  yield AsyncStorage.setItem('userToken', userCredential.user.refreshToken);
 }
 
 export function* authSaga() {
