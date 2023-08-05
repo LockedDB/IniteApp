@@ -7,6 +7,9 @@ import {
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { firebaseAuthentication as auth } from '../../../../firebaseConfig';
 import { getErrorMessage } from '@/utils/utils';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import firebase from 'firebase/compat';
+import UserCredential = firebase.auth.UserCredential;
 
 interface Credentials {
   email: string;
@@ -29,6 +32,10 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
+    initializeApp: state => {
+      state.loading = true;
+      state.error = null;
+    },
     loginRequest: (state, action: PayloadAction<Credentials>) => {
       state.loading = true;
       state.error = null;
@@ -60,6 +67,7 @@ const authSlice = createSlice({
 });
 
 export const {
+  initializeApp,
   loginRequest,
   loginSuccess,
   loginFailure,
@@ -71,10 +79,28 @@ export const {
 
 export default authSlice.reducer;
 
+function* initializeSaga() {
+  const userToken: string = yield AsyncStorage.getItem('userToken');
+  if (userToken) {
+    yield put(loginSuccess());
+  }
+}
+
 function* loginSaga(action: PayloadAction<Credentials>) {
   try {
     const { email, password } = action.payload;
-    yield call(signInWithEmailAndPassword, auth, email, password);
+    const userCredential: UserCredential = yield call(
+      signInWithEmailAndPassword,
+      auth,
+      email,
+      password,
+    );
+
+    if (userCredential.user === null)
+      throw Error('loginSaga: user credentials === null');
+
+    // Save the user information or token
+    yield AsyncStorage.setItem('userToken', userCredential.user.refreshToken);
     yield put(loginSuccess());
   } catch (error) {
     yield put(loginFailure(getErrorMessage(error)));
@@ -100,4 +126,5 @@ export function* authSaga() {
   yield takeLatest(loginRequest.type, loginSaga);
   yield takeLatest(registerRequest.type, registerSaga);
   yield takeLatest(logout.type, logoutSaga);
+  yield takeLatest(initializeApp.type, initializeSaga);
 }
