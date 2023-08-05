@@ -1,5 +1,5 @@
 import { CustomText } from '@/components/CustomText';
-import styles from '@/modules/Home/Components/ProjectCard/styles';
+import styles from '@/modules/home/Components/ProjectCard/styles';
 import { Topic } from '@/Models/topic';
 
 export const TopicNameList = (props: {

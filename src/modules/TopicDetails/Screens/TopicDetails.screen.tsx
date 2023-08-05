@@ -1,7 +1,7 @@
 import { Chat, TopicDetailsFooter, TopicDetailsHeader } from '../Components';
 import { TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { GenericNavigation } from '@/modules/Navigation/types';
+import { GenericNavigation } from '@/modules/navigation/types';
 import { CustomSafeAreaView } from '@/components/CustomSafeAreaView';
 import { TopBar } from '@/components/TopBar';
 import { Close, MoreVertical } from '@/assets/SVG';
