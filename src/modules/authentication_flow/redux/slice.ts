@@ -112,7 +112,18 @@ function* loginSaga(action: PayloadAction<Credentials>) {
 function* registerSaga(action: PayloadAction<Credentials>) {
   try {
     const { email, password } = action.payload;
-    yield call(createUserWithEmailAndPassword, auth, email, password);
+    const userCredential: UserCredential = yield call(
+      createUserWithEmailAndPassword,
+      auth,
+      email,
+      password,
+    );
+
+    if (userCredential.user === null)
+      throw Error('register saga: user credentials === null');
+
+    // Save the user information or token
+    yield AsyncStorage.setItem('userToken', userCredential.user.refreshToken);
     yield put(registerSuccess());
   } catch (error) {
     yield put(registerFailure(getErrorMessage(error)));
