@@ -7,7 +7,7 @@ import {
 import { Black } from '@/utils/colors';
 import { ProjectDetailsScreen } from '@/modules/ProjectDetails/Screens/ProjectDetails.screen';
 import { TopicDetailScreen } from '@/modules/TopicDetails/Screens/TopicDetails.screen';
-import { DrawerNavigator } from '@/modules/navigation/navigators/DrawerNavigator';
+import { DrawerNavigator } from '@/modules/navigation/navigators/DrawerNavigator/DrawerNavigator';
 
 const AppStack = createNativeStackNavigator();
 

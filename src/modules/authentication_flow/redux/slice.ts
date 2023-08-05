@@ -83,6 +83,8 @@ function* initializeSaga() {
   const userToken: string = yield AsyncStorage.getItem('userToken');
   if (userToken) {
     yield put(loginSuccess());
+  } else {
+    yield put(loginFailure('no token found'));
   }
 }
 
@@ -119,6 +121,7 @@ function* registerSaga(action: PayloadAction<Credentials>) {
 
 function* logoutSaga() {
   yield call(signOut, auth);
+  yield AsyncStorage.removeItem('userToken');
   yield put(logout());
 }
 
