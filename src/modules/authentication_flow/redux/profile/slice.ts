@@ -8,6 +8,9 @@ import {
 } from '../../../../../firebaseConfig';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { loginSuccess } from '@/modules/authentication_flow/redux/auth/slice';
+import ImageResizer, {
+  Response as ImageResponse,
+} from 'react-native-image-resizer';
 
 interface UserData {
   displayName: string;
@@ -51,8 +54,17 @@ export const { saveUserRequest, saveUserFailure, saveUserSuccess } =
 export default profileSlice.reducer;
 
 function* uploadImage(uri: string, filePath: string) {
+  const resizedImage: ImageResponse = yield call(
+    ImageResizer.createResizedImage,
+    uri,
+    800,
+    600,
+    'JPEG',
+    60,
+  );
+
   // Retrieve blob
-  const response: Response = yield fetch(uri);
+  const response: Response = yield fetch(resizedImage.uri);
   const blob: Blob = yield response.blob();
 
   const fileRef = ref(firebaseStorage, filePath);
