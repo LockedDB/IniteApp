@@ -1,4 +1,4 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, select, takeLatest } from 'redux-saga/effects';
 import {
   addDoc,
   collection,
@@ -20,6 +20,7 @@ import {
 import firebase from 'firebase/compat';
 import { getErrorMessage } from '@/utils/utils';
 import { dispatchFetchTopics } from '@/modules/Topic/Redux/actions';
+import { selectUserId } from '@/modules/authentication_flow/redux/profile/selectors';
 import QuerySnapshot = firebase.firestore.QuerySnapshot;
 
 export function* watchProjectCreationRequest() {
@@ -47,9 +48,16 @@ function* createProjectWorker({
   payload,
 }: PayloadAction<CreateProjectRequest>) {
   try {
+    const owner_id: string = yield select(selectUserId);
     const projectsCollectionRef = collection(firestoreDatabase, 'projects');
 
-    yield call(addProjectToCollection, projectsCollectionRef, payload);
+    const body = {
+      name: payload.name,
+      description: payload.description,
+      owner_id,
+    };
+
+    yield call(addProjectToCollection, projectsCollectionRef, body);
 
     yield put(dispatchCreateProject.Success());
   } catch (error: unknown) {
@@ -59,11 +67,11 @@ function* createProjectWorker({
 
 function* fetchProjectWorker() {
   try {
-    const ownerId: string = '1'; // yield select(userIdSelector)
+    const uid: string = yield select(selectUserId);
     const projectsCollectionRef = collection(firestoreDatabase, 'projects');
 
     // Create a query against the collection.
-    const q = query(projectsCollectionRef, where('owner_id', '==', ownerId));
+    const q = query(projectsCollectionRef, where('owner_id', '==', uid));
 
     const querySnapshot: QuerySnapshot = yield call(getDocs, q);
     const projects = querySnapshot.docs.map(

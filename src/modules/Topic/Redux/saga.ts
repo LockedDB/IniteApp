@@ -11,6 +11,7 @@ import {
 import { CreateTopicRequestParams } from '@/Models/topic';
 import firebase from 'firebase/compat';
 import { getProjectsParticipants } from '@/modules/Project/Redux/selectors';
+import { selectUserId } from '@/modules/authentication_flow/redux/profile/selectors';
 import QuerySnapshot = firebase.firestore.QuerySnapshot;
 import DocumentData = firebase.firestore.DocumentData;
 
@@ -20,7 +21,7 @@ export function* watchTopicSaga() {
     [
       dispatchFetchTopics.Request,
       /*dispatchCreateProject.Success,
-                        dispatchDeleteProject.Success,*/
+                                    dispatchDeleteProject.Success,*/
     ],
     fetchTopicWorker,
   );
@@ -31,7 +32,7 @@ function* createTopicWorker({
   payload: { projectId, topicName },
 }: PayloadAction<CreateTopicRequestParams>) {
   try {
-    const uid = '1'; // yield
+    const uid: string = yield select(selectUserId);
     const topicsCollectionRef = collection(firestoreDatabase, 'topics');
 
     const topic = {
@@ -64,7 +65,7 @@ function* createTopicWorker({
 
 function* fetchTopicWorker() {
   try {
-    const uid: string = '1'; // yield select(userIdSelector)
+    const uid: string = yield select(selectUserId);
     const topicsCollectionRef = collection(firestoreDatabase, 'topics');
 
     // Create a query against the collection.
