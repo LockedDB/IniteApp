@@ -135,8 +135,7 @@ function* registerSaga(action: PayloadAction<Credentials>) {
 
 function* logoutSaga() {
   yield call(signOut, auth);
-  yield AsyncStorage.removeItem('userToken');
-  yield put(logout());
+  yield call(AsyncStorage.removeItem, 'userToken');
 }
 
 function* saveUserTokenToAsyncStorate(userCredential: UserCredential) {
