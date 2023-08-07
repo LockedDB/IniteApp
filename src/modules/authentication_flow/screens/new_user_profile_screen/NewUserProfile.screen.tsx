@@ -35,13 +35,13 @@ export const NewUserProfileScreen = () => {
   };
 
   const handleSaveProfile = () => {
-    dispatch(saveUserRequest({ displayName, uri: uri }));
+    dispatch(saveUserRequest({ displayName, uri }));
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Set Your Profile</Text>
-      {uri && <Image source={{ uri }} style={styles.photo} />}
+      {uri !== '' && <Image source={{ uri }} style={styles.photo} />}
       <TextInput
         style={styles.input}
         placeholder="Display Name"

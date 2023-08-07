@@ -5,12 +5,19 @@ import { getErrorMessage } from '@/utils/utils';
 import {
   firebaseAuthentication,
   firebaseStorage,
+  firestoreDatabase,
 } from '../../../../../firebaseConfig';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
-import { loginSuccess } from '@/modules/authentication_flow/redux/auth/slice';
+import {
+  loginFailure,
+  loginSuccess,
+} from '@/modules/authentication_flow/redux/auth/slice';
 import ImageResizer, {
   Response as ImageResponse,
 } from 'react-native-image-resizer';
+import { addDoc, collection, getDocs, query, where } from 'firebase/firestore';
+import firebase from 'firebase/compat';
+import QuerySnapshot = firebase.firestore.QuerySnapshot;
 
 interface UserData {
   displayName: string;
@@ -45,13 +52,51 @@ const profileSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    fetchUserProfileRequest: state => {
+      state.loading = true;
+      state.error = null;
+    },
+    fetchUserProfileSuccess: (state, action: PayloadAction<User>) => {
+      state.loading = false;
+      state.user = action.payload;
+    },
+    fetchUserProfileFailure: (state, action: PayloadAction<string>) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
   },
 });
 
-export const { saveUserRequest, saveUserFailure, saveUserSuccess } =
-  profileSlice.actions;
+export const {
+  saveUserRequest,
+  saveUserFailure,
+  saveUserSuccess,
+  fetchUserProfileRequest,
+  fetchUserProfileSuccess,
+  fetchUserProfileFailure,
+} = profileSlice.actions;
 
 export default profileSlice.reducer;
+
+function* fetchUserProfileSaga() {
+  try {
+    const user = firebaseAuthentication.currentUser;
+
+    if (user === null) {
+      yield put(loginFailure('fetchUserProfileSaga: Firebase user not found'));
+      return;
+    }
+
+    const userCollectionRef = collection(firestoreDatabase, 'users');
+    const q = query(userCollectionRef, where('uid', '==', user?.uid));
+    const querySnapshot: QuerySnapshot = yield call(getDocs, q);
+    const userData = querySnapshot.docs.pop()?.data() as User;
+
+    yield put(fetchUserProfileSuccess(userData));
+  } catch (e) {
+    yield put(fetchUserProfileFailure(getErrorMessage(e)));
+  }
+}
 
 function* uploadImage(uri: string, filePath: string) {
   const resizedImage: ImageResponse = yield call(
@@ -117,6 +162,11 @@ function* saveUserSaga({
       projects: [],
       photoURL,
     };
+
+    // send user data to 'users' collection
+    const firestoreUserRef = collection(firestoreDatabase, 'users');
+    yield call(addDoc, firestoreUserRef, userData);
+
     yield put(saveUserSuccess(userData));
     yield put(loginSuccess());
   } catch (e) {
@@ -126,4 +176,5 @@ function* saveUserSaga({
 
 export function* profileSaga() {
   yield takeLatest(saveUserRequest.type, saveUserSaga);
+  yield takeLatest(fetchUserProfileRequest.type, fetchUserProfileSaga);
 }

@@ -7,6 +7,7 @@ import {
   isProjectsLoadingSelector,
   projectsSelector,
 } from '@/modules/Project/Redux/selectors';
+import { fetchUserProfileRequest } from '@/modules/authentication_flow/redux/profile/slice';
 
 interface useFetchProjectsType {
   projects: Project[];
@@ -35,4 +36,11 @@ export const useFetchProjects = (): useFetchProjectsType => {
     isError: isError || false,
     fetchProjects,
   };
+};
+
+export const useFetchProfile = () => {
+  const dispatch = useDispatch();
+  useMountEffect(() => {
+    dispatch(fetchUserProfileRequest());
+  });
 };

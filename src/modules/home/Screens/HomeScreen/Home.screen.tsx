@@ -1,4 +1,7 @@
-import { useFetchProjects } from '@/modules/home/Screens/HomeScreen/hooks';
+import {
+  useFetchProfile,
+  useFetchProjects,
+} from '@/modules/home/Screens/HomeScreen/hooks';
 import { useBlurModal } from '@/components/BlurModal';
 import { CustomText } from '@/components/CustomText';
 import styles from './styles';
@@ -48,6 +51,8 @@ const renderItem = ({ item }: { item: Project }) => <ProjectCard item={item} />;
 export const HomeScreen = () => {
   const { isModalVisible, onCloseModal, onOpenModal } = useBlurModal();
   const { projects, isLoading, isError, fetchProjects } = useFetchProjects();
+
+  useFetchProfile();
 
   return (
     <CustomSafeAreaView>

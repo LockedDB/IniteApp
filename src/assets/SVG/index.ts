@@ -8,3 +8,4 @@ export { default as Close } from './close.svg';
 export { default as Menu } from './menu.svg';
 export { default as MoreVertical } from './more_vert.svg';
 export { default as ChatBubble } from './chat_bubble.svg';
+export { default as Logout } from './logout.svg';
