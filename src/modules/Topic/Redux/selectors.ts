@@ -1,5 +1,6 @@
 import { StoreState } from '@/reducers/reducers';
 import { createSelector } from '@reduxjs/toolkit';
+import { RemoteDataType } from '@/utils/services';
 
 const stateSelector = (state: StoreState) => state.topics;
 
@@ -10,3 +11,6 @@ export const getTopicByProjectId = createSelector(
   projectIdProp,
   ({ topics }, id) => topics.filter(({ projectId }) => projectId === id),
 );
+
+export const selectIsTopicLoading = (state: StoreState) =>
+  state.topics.type === RemoteDataType.Loading;

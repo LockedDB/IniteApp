@@ -6,6 +6,7 @@ export default StyleSheet.create({
     paddingHorizontal: 24,
   },
   container: {
+    gap: 8,
     padding: 16,
     backgroundColor: Gunmetal,
     borderRadius: 8,

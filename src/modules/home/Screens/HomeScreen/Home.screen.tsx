@@ -11,11 +11,13 @@ import { ListFooter, ProjectCard } from '@/modules/home/Components';
 import React from 'react';
 import { TopBar } from '@/components/TopBar';
 import { CustomSafeAreaView } from '@/components/CustomSafeAreaView';
-import { AddProjectModal } from '@/modules/home/Components/AddProjectModal';
+import { AddingContentModal } from '@/modules/home/Components/AddProjectModal';
 import { Project } from '@/Models/project';
 import LoadingComponent from '@/components/LoadingComponent/LoadingComponent';
 import { DrawerActions, useNavigation } from '@react-navigation/native';
 import { GenericNavigation } from '@/modules/navigation/types';
+import { useDispatch } from 'react-redux';
+import { dispatchCreateProject } from '@/modules/Project/Redux/actions';
 
 const Title = () => (
   <CustomText fontStyle="black" style={styles.title}>
@@ -49,10 +51,15 @@ const Header = () => {
 const renderItem = ({ item }: { item: Project }) => <ProjectCard item={item} />;
 
 export const HomeScreen = () => {
+  const dispatch = useDispatch();
   const { isModalVisible, onCloseModal, onOpenModal } = useBlurModal();
   const { projects, isLoading, isError, fetchProjects } = useFetchProjects();
 
   useFetchProfile();
+
+  const onSubmit = (name: string, description: string) => {
+    dispatch(dispatchCreateProject.Request({ name, description }));
+  };
 
   return (
     <CustomSafeAreaView>
@@ -68,7 +75,12 @@ export const HomeScreen = () => {
       />
 
       <ListFooter onPress={onOpenModal} />
-      <AddProjectModal isVisible={isModalVisible} onClose={onCloseModal} />
+      <AddingContentModal
+        isVisible={isModalVisible}
+        onClose={onCloseModal}
+        type="project"
+        onSubmit={onSubmit}
+      />
 
       <LoadingComponent isLoading={isLoading} />
     </CustomSafeAreaView>
