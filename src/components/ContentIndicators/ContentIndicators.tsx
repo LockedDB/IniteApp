@@ -13,13 +13,17 @@ export const ContentIndicators = ({
   attachFileCount,
 }: ContentIndicatorsProps) => (
   <View>
-    <View style={[styles.row, styles.spacing]}>
-      <ChatBubble />
-      <CustomText>{chatBubbleCount}</CustomText>
-    </View>
-    <View style={[styles.row, styles.spacing]}>
-      <AttachFile />
-      <CustomText>{attachFileCount}</CustomText>
-    </View>
+    {chatBubbleCount > 0 && (
+      <View style={[styles.row, styles.spacing]}>
+        <ChatBubble />
+        <CustomText>{chatBubbleCount}</CustomText>
+      </View>
+    )}
+    {attachFileCount > 0 && (
+      <View style={[styles.row, styles.spacing]}>
+        <AttachFile />
+        <CustomText>{attachFileCount}</CustomText>
+      </View>
+    )}
   </View>
 );

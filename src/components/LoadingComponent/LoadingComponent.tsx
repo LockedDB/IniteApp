@@ -2,11 +2,14 @@ import AnimatedDot from './AnimatedDot';
 import { OpacityLoader } from './OpacityLoader';
 
 export interface LoadingComponentProps {
-  isLoading: boolean;
+  isLoading?: boolean;
   opacity?: number;
 }
 
-const LoadingComponent = ({ isLoading, opacity }: LoadingComponentProps) => {
+const LoadingComponent = ({
+  isLoading = true,
+  opacity,
+}: LoadingComponentProps) => {
   return (
     <OpacityLoader
       isLoading={isLoading}

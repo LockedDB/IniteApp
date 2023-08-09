@@ -12,5 +12,10 @@ export const getTopicByProjectId = createSelector(
   ({ topics }, id) => topics.filter(({ projectId }) => projectId === id),
 );
 
+export const selectTopicById = (
+  { topics: { topics } }: StoreState,
+  topicId: string,
+) => topics.find(({ id }) => id === topicId);
+
 export const selectIsTopicLoading = (state: StoreState) =>
   state.topics.type === RemoteDataType.Loading;

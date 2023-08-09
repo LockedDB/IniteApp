@@ -28,16 +28,18 @@ import LoadingComponent from '@/components/LoadingComponent/LoadingComponent';
 
 const renderItem = ({ item }: { item: Topic }) => <TopicRow item={item} />;
 
-const ListHeader = ({ project }: { project?: Project }) => (
+const ListHeader = ({ project }: { project: Project }) => (
   <>
     <View style={styles.header}>
       <CustomText style={styles.title} fontStyle="black">
         {project?.name}
       </CustomText>
       <CustomText style={styles.description}>{project?.description}</CustomText>
-      <View style={styles.tagContainer}>
-        <TagList tags={project?.tags} />
-      </View>
+      {project.tags && (
+        <View style={styles.tagContainer}>
+          <TagList tags={project.tags} />
+        </View>
+      )}
     </View>
 
     <Divider />
@@ -63,11 +65,13 @@ export const ProjectDetailsScreen = () => {
     topics: getTopicByProjectId(state, params?.id),
   }));
 
+  if (!project || !topics) return <LoadingComponent />;
+
   const onSubmit = (name: string) => {
     if (!project) return;
 
     dispatch(
-      dispatchCreateTopic.Request({ projectId: project?.id, topicName: name }),
+      dispatchCreateTopic.Request({ projectId: project.id, topicName: name }),
     );
   };
 
