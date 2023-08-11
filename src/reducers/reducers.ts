@@ -4,7 +4,7 @@ import {projectSlice} from '@/modules/Project/Redux/slice';
 import {topicsSlice} from '@/modules/Topic/Redux/slice';
 import authReducer from '@/modules/authentication_flow/redux/auth/slice';
 import profileReducer from '@/modules/authentication_flow/redux/profile/slice';
-import {messageSlice} from '@/modules/ProjectDetails/slice';
+import {messageSlice} from '@/modules/TopicDetails/slice';
 
 /**
  * The root reducer is the single point where all the reducers are combined,

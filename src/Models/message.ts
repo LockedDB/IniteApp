@@ -1,8 +1,8 @@
 export interface Message {
-  messages: Messages;
+  messages: Messages[];
 }
 
-interface Messages {
+export interface Messages {
   messageText: string;
   sentAt: Date;
   sentBy: string;

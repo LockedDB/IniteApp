@@ -5,7 +5,7 @@ import { White300 } from '@/utils/colors';
 import { CustomText } from '@/components/CustomText';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { saveMessageRequest } from '@/modules/ProjectDetails/slice';
+import { saveMessageRequest } from '@/modules/TopicDetails/slice';
 
 interface TopicDetailsFooterProps {
   topicId: string;

@@ -29,7 +29,7 @@ export const TopicDetailScreen = ({}: TopicDetailScreenProps) => {
       <TopicDetailsHeader />
       <Divider />
 
-      <Chat />
+      <Chat topicId={id} />
 
       <TopicDetailsFooter topicId={id} />
     </CustomSafeAreaView>
