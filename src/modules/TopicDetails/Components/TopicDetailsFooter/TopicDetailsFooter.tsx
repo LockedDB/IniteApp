@@ -4,12 +4,20 @@ import { AttachFile } from '@/assets/SVG';
 import { White300 } from '@/utils/colors';
 import { CustomText } from '@/components/CustomText';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { saveMessageRequest } from '@/modules/ProjectDetails/slice';
 
-export const TopicDetailsFooter = () => {
+interface TopicDetailsFooterProps {
+  topicId: string;
+}
+
+export const TopicDetailsFooter = ({ topicId }: TopicDetailsFooterProps) => {
+  const dispatch = useDispatch();
   const [message, setMessage] = useState('');
 
   const onPress = () => {
     // send message
+    dispatch(saveMessageRequest({ messageText: message, topicId }));
     setMessage('');
   };
 

@@ -3,6 +3,7 @@ import { watchProjectCreationRequest } from '@/modules/Project/Redux/saga';
 import { watchTopicSaga } from '@/modules/Topic/Redux/saga';
 import { authSaga } from '@/modules/authentication_flow/redux/auth/slice';
 import { profileSaga } from '@/modules/authentication_flow/redux/profile/slice';
+import { messagesWatcher } from '@/modules/ProjectDetails/slice';
 
 export default function* rootSaga() {
   yield all([
@@ -10,5 +11,6 @@ export default function* rootSaga() {
     watchProjectCreationRequest(),
     watchTopicSaga(),
     profileSaga(),
+    messagesWatcher(),
   ]);
 }
