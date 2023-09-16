@@ -9,3 +9,6 @@ export { default as Menu } from './menu.svg';
 export { default as MoreVertical } from './more_vert.svg';
 export { default as ChatBubble } from './chat_bubble.svg';
 export { default as Logout } from './logout.svg';
+export { default as OnbLogin } from './onb_login.svg';
+export { default as OnbLost } from './onb_lost.svg';
+export { default as OnbMeditate } from './onb_meditate.svg';
