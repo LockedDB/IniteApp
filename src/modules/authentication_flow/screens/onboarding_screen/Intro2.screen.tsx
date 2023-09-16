@@ -20,23 +20,25 @@ const IntroScreen02 = () => {
 
   return (
     <SafeAreaView style={{ backgroundColor: 'black', flex: 1 }}>
-      <Animated.View
-        entering={FadeInUp.duration(1000).springify()}
-        style={{
-          paddingHorizontal: 24,
-          height: 52,
-          alignItems: 'center',
-          flexDirection: 'row',
-        }}>
-        <TouchableOpacity onPress={() => navigation.replace(INTRO_SCREEN_1)}>
-          <ArrowBack color={'white'} />
-        </TouchableOpacity>
-      </Animated.View>
-      <Animated.View
-        entering={FadeInUp.delay(200).duration(1000).springify()}
-        style={{ alignItems: 'center', flex: 1, justifyContent: 'center' }}>
-        <OnbMeditate width={240} height={240} />
-      </Animated.View>
+      <View style={{ flex: 1 }}>
+        <Animated.View
+          entering={FadeInUp.duration(1000).springify()}
+          style={{
+            paddingHorizontal: 24,
+            height: 52,
+            alignItems: 'center',
+            flexDirection: 'row',
+          }}>
+          <TouchableOpacity onPress={() => navigation.replace(INTRO_SCREEN_1)}>
+            <ArrowBack color={'white'} />
+          </TouchableOpacity>
+        </Animated.View>
+        <Animated.View
+          entering={FadeInUp.delay(200).duration(1000).springify()}
+          style={{ alignItems: 'center', flex: 1, justifyContent: 'center' }}>
+          <OnbMeditate width={240} height={240} />
+        </Animated.View>
+      </View>
       <View style={{ padding: 24 }}>
         <Animated.Text
           entering={FadeInDown.duration(1000).springify()}

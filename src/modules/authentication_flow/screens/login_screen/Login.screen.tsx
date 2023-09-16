@@ -44,15 +44,17 @@ export const LoginScreen = () => {
           />
         </TouchableOpacity>
 
-        <Animated.View
-          entering={FadeInUp.delay(200).duration(1000).springify()}
-          style={{
-            alignItems: 'center',
-            flex: 1,
-            justifyContent: 'center',
-          }}>
-          <OnbLogin width={240} height={240} />
-        </Animated.View>
+        <View style={{ flex: 1 }}>
+          <Animated.View
+            entering={FadeInUp.delay(200).duration(1000).springify()}
+            style={{
+              alignItems: 'center',
+              flex: 1,
+              justifyContent: 'center',
+            }}>
+            <OnbLogin width={240} height={240} />
+          </Animated.View>
+        </View>
 
         <View style={{ padding: 24 }}>
           <Animated.Text
@@ -88,7 +90,7 @@ export const LoginScreen = () => {
                 style={{
                   fontSize: 16,
                   fontWeight: '500',
-                  color: 'black',
+                  color: 'white',
                   paddingRight: 12,
                   height: 48,
                   borderRadius: 12,
@@ -105,10 +107,11 @@ export const LoginScreen = () => {
                 autoCapitalize="none"
                 placeholder="Your Password"
                 placeholderTextColor={'white'}
+                secureTextEntry
                 style={{
                   fontSize: 16,
                   fontWeight: '500',
-                  color: 'black',
+                  color: 'white',
                   paddingRight: 12,
                   height: 48,
                   borderRadius: 12,

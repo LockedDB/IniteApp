@@ -13,11 +13,17 @@ const IntroScreen01 = () => {
   const navigation = useNavigation<GenericNavigation>();
   return (
     <SafeAreaView style={{ backgroundColor: 'black', flex: 1 }}>
-      <Animated.View
-        entering={FadeInUp.duration(1000).springify()}
-        style={{ alignItems: 'center', flex: 1, justifyContent: 'center' }}>
-        <OnbLost width={240} height={240} />
-      </Animated.View>
+      <View style={{ flex: 1 }}>
+        <Animated.View
+          entering={FadeInUp.duration(1000).springify()}
+          style={{
+            alignItems: 'center',
+            flex: 1,
+            justifyContent: 'center',
+          }}>
+          <OnbLost />
+        </Animated.View>
+      </View>
       <View style={{ padding: 24 }}>
         <Animated.Text
           entering={FadeInDown.duration(1000).springify()}
