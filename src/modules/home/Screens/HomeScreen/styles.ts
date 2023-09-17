@@ -10,6 +10,7 @@ export default StyleSheet.create({
     lineHeight: 28,
   },
   contentList: {
+    flex: 1,
     gap: 16,
     paddingHorizontal: 16,
   },

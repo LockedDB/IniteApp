@@ -74,10 +74,16 @@ export const HomeScreen = () => {
         keyExtractor={item => item.id}
         contentContainerStyle={styles.contentList}
         ListEmptyComponent={
-          <View>
+          <View
+            style={{
+              flex: 1,
+              justifyContent: 'center',
+            }}>
             <Animated.View
               entering={FadeInUp.delay(200).duration(1000).springify()}
-              style={{ flex: 1, alignSelf: 'center' }}>
+              style={{
+                alignSelf: 'center',
+              }}>
               <NoData width={240} height={240} />
             </Animated.View>
             <Animated.Text
