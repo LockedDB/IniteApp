@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { Pressable, TextInput, TouchableOpacity, View } from 'react-native';
+import { TextInput, TouchableOpacity, View } from 'react-native';
 import styles from './styles';
 import { Black, White300 } from '@/utils/colors';
 import { CustomText } from '@/components/CustomText';
 import { BlurModal, BlurModalProps } from '@/components/BlurModal';
-import { Close } from '@/assets/SVG';
 import { CategoryTag } from '@/components/CategoryTag';
 
 const CreateButton = ({ onPress }: { onPress: () => void }) => (
@@ -38,25 +37,21 @@ export const AddingContentModal = ({
   };
 
   return (
-    <BlurModal {...props} style={styles.modal} withCloseButton={false}>
+    <BlurModal {...props} style={styles.modal} withCloseButton>
       <View style={styles.container}>
         <View style={styles.headerContainer}>
           <TextInput
-            placeholder={isProject ? 'Project Name' : 'Topic Name'}
+            placeholder={`Add a ${isProject ? 'Project' : 'Topic'} Name 🤘`}
             placeholderTextColor={White300}
             style={styles.projectNameInput}
             onChangeText={setName}
             value={name}
           />
-
-          <Pressable onPress={props.onClose}>
-            <Close />
-          </Pressable>
         </View>
 
         {isProject && (
           <TextInput
-            placeholder="Other initiators will appreciate some context, you can write a description here..."
+            placeholder="Other teammates will appreciate some context, you can write a description here..."
             placeholderTextColor={White300}
             style={styles.descriptionInput}
             multiline

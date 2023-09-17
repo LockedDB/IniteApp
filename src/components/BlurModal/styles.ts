@@ -4,7 +4,7 @@ export default StyleSheet.create({
   modalContent: {
     alignItems: 'center',
     justifyContent: 'center',
-    height: '100%',
+    flex: 1,
     zIndex: 1,
   },
   blur: {

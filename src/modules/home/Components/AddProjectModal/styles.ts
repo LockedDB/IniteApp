@@ -18,7 +18,6 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
   },
   projectNameInput: {
-    width: '80%',
     fontSize: 24,
     fontFamily: 'Roboto-Bold',
     color: White,
