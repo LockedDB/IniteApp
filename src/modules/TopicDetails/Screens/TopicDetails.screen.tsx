@@ -10,6 +10,8 @@ import { TOPICS_DETAILS_SCREEN } from '@/modules/navigation/paths';
 import { useState } from 'react';
 import { BottomSheet } from '@/components/BottomSheet/BottomSheet';
 import { CustomText } from '@/components/CustomText';
+import { useBottomSheetMethods } from '@/components/BottomSheet/hooks/useBottomSheetMethods';
+import { OptionsBottomSheet } from '@/components/BottomSheet/components/OptionsBottomSheet';
 
 interface TopicDetailScreenProps {}
 
@@ -18,15 +20,16 @@ export const TopicDetailScreen = ({}: TopicDetailScreenProps) => {
     params: { id },
   } = useRoute<ScreenRouteType<typeof TOPICS_DETAILS_SCREEN>>();
   const [isAttachmentsOpen, setAttachmentsOpen] = useState(false);
-  const [isOptionsOpen, setOptionsOpen] = useState(false);
+  const {
+    isOpen: isOptionsOpen,
+    setOpen: setOptionsOpen,
+    onToggle: onToggleOptions,
+  } = useBottomSheetMethods();
+
   const { goBack } = useNavigation<GenericNavigation>();
 
   function onToggleAttachments() {
     setAttachmentsOpen(false);
-  }
-
-  function onToggleOptions() {
-    setOptionsOpen(false);
   }
 
   return (
@@ -93,19 +96,7 @@ export const TopicDetailScreen = ({}: TopicDetailScreenProps) => {
         </View>
       </BottomSheet>
 
-      <BottomSheet
-        height={140}
-        isOpen={isOptionsOpen}
-        onToggle={onToggleOptions}>
-        <View style={{ gap: 8 }}>
-          <TouchableOpacity style={{ paddingVertical: 8 }} onPress={() => {}}>
-            <CustomText style={{ fontSize: 16 }}>Rename</CustomText>
-          </TouchableOpacity>
-          <TouchableOpacity style={{ paddingVertical: 8 }} onPress={() => {}}>
-            <CustomText style={{ fontSize: 16 }}>Delete</CustomText>
-          </TouchableOpacity>
-        </View>
-      </BottomSheet>
+      <OptionsBottomSheet isOpen={isOptionsOpen} onToggle={onToggleOptions} />
     </CustomSafeAreaView>
   );
 };

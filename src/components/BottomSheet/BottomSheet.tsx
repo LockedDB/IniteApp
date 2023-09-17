@@ -18,7 +18,7 @@ import { Portal } from '@gorhom/portal';
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
-interface BottomSheetProps {
+export interface BottomSheetProps {
   isOpen: boolean;
   onToggle: () => void;
   height?: number;

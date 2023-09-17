@@ -25,6 +25,8 @@ import { AddingContentModal } from '@/modules/home/Components/AddProjectModal';
 import { useBlurModal } from '@/components/BlurModal';
 import { dispatchCreateTopic } from '@/modules/Topic/Redux/actions';
 import LoadingComponent from '@/components/LoadingComponent/LoadingComponent';
+import { OptionsBottomSheet } from '@/components/BottomSheet/components/OptionsBottomSheet';
+import { useBottomSheetMethods } from '@/components/BottomSheet/hooks/useBottomSheetMethods';
 
 const renderItem = ({ item }: { item: Topic }) => <TopicRow item={item} />;
 
@@ -59,6 +61,7 @@ export const ProjectDetailsScreen = () => {
     useRoute<ScreenRouteType<typeof TOPICS_DETAILS_SCREEN>>().params;
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsTopicLoading);
+  const { isOpen, setOpen, onToggle } = useBottomSheetMethods();
 
   const { project, topics } = useSelector((state: StoreState) => ({
     project: getProjectById(state, params?.id),
@@ -84,7 +87,11 @@ export const ProjectDetailsScreen = () => {
               <ArrowBack color={'white'} />
             </TouchableOpacity>
           }
-          rightComponent={<MoreVertical />}
+          rightComponent={
+            <TouchableOpacity onPress={() => setOpen(true)}>
+              <MoreVertical />
+            </TouchableOpacity>
+          }
         />
       </View>
 
@@ -108,6 +115,8 @@ export const ProjectDetailsScreen = () => {
         onClose={onCloseModal}
         onSubmit={onSubmit}
       />
+
+      <OptionsBottomSheet isOpen={isOpen} onToggle={onToggle} />
 
       <LoadingComponent isLoading={isLoading} />
     </CustomSafeAreaView>
