@@ -68,6 +68,9 @@ const authSlice = createSlice({
     logout: state => {
       state.authenticated = false;
     },
+    cleanError: state => {
+      state.error = null;
+    },
   },
 });
 
@@ -79,6 +82,7 @@ export const {
   registerRequest,
   registerSuccess,
   registerFailure,
+  cleanError,
   logout,
 } = authSlice.actions;
 

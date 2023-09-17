@@ -22,7 +22,7 @@ const ScreenIndicators = ({
           width: 8,
           height: 8,
           borderRadius: 8,
-          backgroundColor: i === activeIndex ? 'black' : 'gray',
+          backgroundColor: i === activeIndex ? 'white' : 'gray',
         }}
         key={i}
       />

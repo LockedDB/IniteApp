@@ -6,3 +6,7 @@ export const selectIsUserLoggedIn = (state: StoreState): boolean =>
 export const selectIsAuthLoading = ({
   auth: { loading },
 }: StoreState): boolean => loading;
+
+export const selectErrorAuth = ({
+  auth: { error },
+}: StoreState): string | null => error;
