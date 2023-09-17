@@ -12,3 +12,4 @@ export { default as Logout } from './logout.svg';
 export { default as OnbLogin } from './onb_login.svg';
 export { default as OnbLost } from './onb_lost.svg';
 export { default as OnbMeditate } from './onb_meditate.svg';
+export { default as OnbRegister } from './onb_register.svg';

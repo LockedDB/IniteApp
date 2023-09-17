@@ -10,5 +10,10 @@ export const INTRO_2_DATA = {
 };
 export const LOG_IN_SCREEN = {
   title: "Let's\nGet Started",
+  description: 'To enter into an account, kindly enter your details',
+};
+
+export const REGISTER_DATA = {
+  title: 'Welcome',
   description: 'To register for an account, kindly enter your details',
 };

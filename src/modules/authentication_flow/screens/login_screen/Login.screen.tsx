@@ -15,12 +15,13 @@ import {
 } from '@/modules/authentication_flow/redux/auth/slice';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigation } from '@/modules/navigation/types';
-import { INTRO_SCREEN_2 } from '@/modules/navigation/paths';
+import { INTRO_SCREEN_2, REGISTER_SCREEN } from '@/modules/navigation/paths';
 import { ArrowBack, OnbLogin } from '@/assets/SVG';
 import Animated, { FadeInDown, FadeInUp } from 'react-native-reanimated';
 import { LOG_IN_SCREEN } from '@/modules/authentication_flow/screens/onboarding_screen/data/data';
 import PrimaryButton from '@/modules/authentication_flow/screens/onboarding_screen/components/PrimaryButton';
 import { selectErrorAuth } from '@/modules/authentication_flow/redux/auth/selectors';
+import { useMountEffect } from '@/utils/utils';
 
 export const LoginScreen = () => {
   const navigation = useNavigation<GenericNavigation>();
@@ -36,9 +37,16 @@ export const LoginScreen = () => {
   };
 
   const handleGoBack = () => {
-    dispatch(cleanError());
     navigation.replace(INTRO_SCREEN_2);
   };
+
+  useMountEffect(() => {
+    dispatch(cleanError());
+
+    return () => {
+      dispatch(cleanError());
+    };
+  });
 
   return (
     <KeyboardAvoidingView behavior="position" style={{ flex: 1 }}>
@@ -48,12 +56,32 @@ export const LoginScreen = () => {
           backgroundColor: 'black',
           minHeight: dimensions.height,
         }}>
-        <TouchableOpacity onPress={handleGoBack}>
-          <ArrowBack
-            color={'white'}
-            style={{ marginLeft: 24, marginTop: 16 }}
-          />
-        </TouchableOpacity>
+        <View>
+          <Animated.View
+            style={{
+              marginHorizontal: 24,
+              marginTop: 16,
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+            entering={FadeInUp.duration(1000).springify()}>
+            <TouchableOpacity onPress={handleGoBack}>
+              <ArrowBack color={'white'} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigation.replace(REGISTER_SCREEN)}>
+              <Text
+                style={{
+                  fontSize: 16,
+                  color: 'white',
+                  textDecorationLine: 'underline',
+                }}>
+                Sign Up
+              </Text>
+            </TouchableOpacity>
+          </Animated.View>
+        </View>
 
         <View style={{ flex: 1 }}>
           <Animated.View
@@ -144,6 +172,12 @@ export const LoginScreen = () => {
               />
             </Animated.View>
             <Animated.View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                gap: 12,
+                justifyContent: 'space-between',
+              }}
               entering={FadeInDown.delay(600).duration(1000).springify()}>
               <PrimaryButton label="Log In" onPress={handleLogin} />
             </Animated.View>
