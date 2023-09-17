@@ -7,7 +7,7 @@ import { CustomText } from '@/components/CustomText';
 import styles from './styles';
 import { FlatList, TouchableOpacity, View } from 'react-native';
 import { Menu, NoData } from '@/assets/SVG';
-import { ListFooter, ProjectCard } from '@/modules/home/Components';
+import { ProjectCard } from '@/modules/home/Components';
 import React from 'react';
 import { TopBar } from '@/components/TopBar';
 import { CustomSafeAreaView } from '@/components/CustomSafeAreaView';
@@ -19,6 +19,7 @@ import { GenericNavigation } from '@/modules/navigation/types';
 import { useDispatch } from 'react-redux';
 import { dispatchCreateProject } from '@/modules/Project/Redux/actions';
 import Animated, { FadeInDown, FadeInUp } from 'react-native-reanimated';
+import PrimaryButton from '@/modules/authentication_flow/screens/onboarding_screen/components/PrimaryButton';
 
 const Title = () => (
   <CustomText fontStyle="black" style={styles.title}>
@@ -103,7 +104,14 @@ export const HomeScreen = () => {
         }
       />
 
-      <ListFooter onPress={onOpenModal} />
+      <View style={{ padding: 24 }}>
+        <PrimaryButton
+          label="+"
+          labelStyle={{ fontSize: 24 }}
+          onPress={onOpenModal}
+        />
+      </View>
+
       <AddingContentModal
         isVisible={isModalVisible}
         onClose={onCloseModal}

@@ -8,7 +8,6 @@ import { GenericNavigation, ScreenRouteType } from '@/modules/navigation/types';
 import { CustomText } from '@/components/CustomText';
 import { TopBar } from '@/components/TopBar';
 import { Divider } from '@/components/Divider';
-import { AddListButton } from '@/components/AddListButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { StoreState } from '@/reducers/reducers';
 import {
@@ -27,6 +26,7 @@ import { dispatchCreateTopic } from '@/modules/Topic/Redux/actions';
 import LoadingComponent from '@/components/LoadingComponent/LoadingComponent';
 import { OptionsBottomSheet } from '@/components/BottomSheet/components/OptionsBottomSheet';
 import { useBottomSheetMethods } from '@/components/BottomSheet/hooks/useBottomSheetMethods';
+import PrimaryButton from '@/modules/authentication_flow/screens/onboarding_screen/components/PrimaryButton';
 
 const renderItem = ({ item }: { item: Topic }) => <TopicRow item={item} />;
 
@@ -105,8 +105,12 @@ export const ProjectDetailsScreen = () => {
         contentContainerStyle={styles.list}
       />
 
-      <View style={styles.buttonContainer}>
-        <AddListButton onPress={onOpenModal} />
+      <View style={{ padding: 24 }}>
+        <PrimaryButton
+          label="+"
+          labelStyle={{ fontSize: 24 }}
+          onPress={onOpenModal}
+        />
       </View>
 
       <AddingContentModal
