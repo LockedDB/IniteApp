@@ -1,11 +1,8 @@
 import { TextInput, TouchableOpacity, View } from 'react-native';
-import styles from './styles';
-import { AttachFile } from '@/assets/SVG';
-import { White300 } from '@/utils/colors';
-import { CustomText } from '@/components/CustomText';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { saveMessageRequest } from '@/modules/TopicDetails/slice';
+import { AddAttachment, PaperPlane } from '@/assets/SVG';
 
 interface TopicDetailsFooterProps {
   topicId: string;
@@ -15,30 +12,58 @@ export const TopicDetailsFooter = ({ topicId }: TopicDetailsFooterProps) => {
   const dispatch = useDispatch();
   const [message, setMessage] = useState('');
 
-  const onPress = () => {
+  function onSend() {
     // send message
     dispatch(saveMessageRequest({ messageText: message, topicId }));
     setMessage('');
-  };
+  }
+
+  function onAddAttachment() {}
 
   return (
-    <View style={styles.container}>
-      <View style={styles.inputContainer}>
-        <TouchableOpacity style={styles.attachContainer}>
-          <AttachFile />
-        </TouchableOpacity>
+    <View
+      style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingHorizontal: 16,
+        paddingTop: 12,
+        borderTopColor: 'white',
+        borderTopWidth: 0.2,
+        gap: 8,
+      }}>
+      <TouchableOpacity onPress={onAddAttachment}>
+        <AddAttachment />
+      </TouchableOpacity>
+
+      <View
+        style={{
+          flex: 1,
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: 8,
+        }}>
         <TextInput
           value={message}
           onChangeText={setMessage}
-          placeholder="Write a message..."
-          placeholderTextColor={White300}
-          style={styles.input}
           multiline
+          placeholder="Write a message..."
+          placeholderTextColor="white"
+          style={{
+            flex: 1,
+            fontSize: 16,
+            color: 'white',
+            flexWrap: 'wrap',
+            flexGrow: 1,
+          }}
         />
+        <TouchableOpacity
+          onPress={onSend}
+          hitSlop={20}
+          style={{ paddingTop: 5, flexShrink: 0 }}>
+          <PaperPlane color="white" />
+        </TouchableOpacity>
       </View>
-      <TouchableOpacity onPress={onPress} style={styles.sendButton}>
-        <CustomText style={styles.sendText}>Send</CustomText>
-      </TouchableOpacity>
     </View>
   );
 };

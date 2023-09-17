@@ -1,6 +1,7 @@
-import { View } from 'react-native';
-import styles from './styles';
+import { Image, View } from 'react-native';
 import { CustomText } from '@/components/CustomText';
+
+const c = require('../../../../assets/png/test_user.png');
 
 type UserTypes = 'user' | 'other';
 
@@ -13,9 +14,21 @@ export const ChatMessage = ({
   from = 'user',
   textMessage = '',
 }: ChatMessageProps) => (
-  <View style={styles.container}>
-    <View style={[styles.message, styles[from]]}>
-      <CustomText>{textMessage}</CustomText>
+  <View style={{ alignSelf: 'stretch', flexDirection: 'row', gap: 16 }}>
+    <Image source={c} style={{ borderRadius: 2, width: 24, height: 24 }} />
+    <View>
+      <View style={{ flexDirection: 'row', alignItems: 'baseline', gap: 4 }}>
+        <CustomText fontStyle="bold" style={{ fontSize: 16 }}>
+          Marc Wright
+        </CustomText>
+        <CustomText style={{ color: '#fff', fontSize: 10, opacity: 0.7 }}>
+          1:48pm
+        </CustomText>
+      </View>
+
+      <View>
+        <CustomText>{textMessage}</CustomText>
+      </View>
     </View>
   </View>
 );

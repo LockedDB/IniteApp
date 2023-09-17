@@ -9,7 +9,6 @@ import { ScreenRouteType } from '@/modules/navigation/types';
 import { useSelector } from 'react-redux';
 import { selectTopicById } from '@/modules/Topic/Redux/selectors';
 import { StoreState } from '@/reducers/reducers';
-import LoadingComponent from '@/components/LoadingComponent/LoadingComponent';
 
 interface TopicDetailsHeaderProps {}
 
@@ -19,7 +18,7 @@ export const TopicDetailsHeader = ({}: TopicDetailsHeaderProps) => {
   } = useRoute<ScreenRouteType<typeof TOPICS_DETAILS_SCREEN>>();
   const topic = useSelector((state: StoreState) => selectTopicById(state, id));
 
-  if (!topic) return <LoadingComponent />;
+  if (!topic) return null;
 
   const { topicName, members, nAttachments, nMessages } = topic;
 
@@ -32,13 +31,16 @@ export const TopicDetailsHeader = ({}: TopicDetailsHeaderProps) => {
       <View style={styles.contentContainer}>
         <View style={styles.participantsContainer}>
           <View style={styles.bubblesContainer}>
-            <UserBubble source={{ uri: 'https://picsum.photos/200/300.jpg' }} />
-            <UserBubble source={{ uri: 'https://picsum.photos/200/300.jpg' }} />
-            <UserBubble source={{ uri: 'https://picsum.photos/200/300.jpg' }} />
+            {members.map(member => (
+              <UserBubble
+                //TODO: Retrieve user data from participant id
+                source={{ uri: 'https://picsum.photos/200/300.jpg' }}
+              />
+            ))}
           </View>
-          <CustomText fontStyle="bold">{`${members.length} active participant${
-            members.length > 1 ? 's' : ''
-          }`}</CustomText>
+          <CustomText style={{ fontSize: 14 }}>{`${
+            members.length
+          } active participant${members.length > 1 ? 's' : ''}`}</CustomText>
         </View>
         <ContentIndicators
           chatBubbleCount={nMessages}

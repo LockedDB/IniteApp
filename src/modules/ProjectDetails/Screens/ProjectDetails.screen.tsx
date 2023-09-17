@@ -81,7 +81,7 @@ export const ProjectDetailsScreen = () => {
         <TopBar
           leftComponent={
             <TouchableOpacity onPress={goBack}>
-              <ArrowBack />
+              <ArrowBack color={'white'} />
             </TouchableOpacity>
           }
           rightComponent={<MoreVertical />}

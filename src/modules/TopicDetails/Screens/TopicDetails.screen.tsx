@@ -1,5 +1,5 @@
 import { Chat, TopicDetailsFooter, TopicDetailsHeader } from '../Components';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { GenericNavigation, ScreenRouteType } from '@/modules/navigation/types';
 import { CustomSafeAreaView } from '@/components/CustomSafeAreaView';
@@ -18,14 +18,16 @@ export const TopicDetailScreen = ({}: TopicDetailScreenProps) => {
 
   return (
     <CustomSafeAreaView>
-      <TopBar
-        leftComponent={
-          <TouchableOpacity onPress={goBack}>
-            <Close />
-          </TouchableOpacity>
-        }
-        rightComponent={<MoreVertical />}
-      />
+      <View style={{ paddingHorizontal: 16 }}>
+        <TopBar
+          leftComponent={
+            <TouchableOpacity onPress={goBack}>
+              <Close />
+            </TouchableOpacity>
+          }
+          rightComponent={<MoreVertical />}
+        />
+      </View>
       <TopicDetailsHeader />
       <Divider />
 

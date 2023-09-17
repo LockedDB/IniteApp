@@ -3,8 +3,9 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   container: {
-    justifyContent: 'center',
+    alignItems: 'flex-start',
     alignSelf: 'stretch',
+    gap: 16,
   },
   message: {
     padding: 8,

@@ -1,9 +1,4 @@
-import {
-  SafeAreaView,
-  TouchableOpacity,
-  useWindowDimensions,
-  View,
-} from 'react-native';
+import { SafeAreaView, TouchableOpacity, View } from 'react-native';
 import Animated, { FadeInDown, FadeInUp } from 'react-native-reanimated';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigation } from '@/modules/navigation/types';
@@ -15,7 +10,6 @@ import { INTRO_SCREEN_1, LOGIN_SCREEN } from '@/modules/navigation/paths';
 import { ArrowBack, OnbMeditate } from '@/assets/SVG';
 
 const IntroScreen02 = () => {
-  const dimensions = useWindowDimensions();
   const navigation = useNavigation<GenericNavigation>();
 
   return (

@@ -1,4 +1,5 @@
 export { default as Add } from './add.svg';
+export { default as AddAttachment } from './add_attachment.svg';
 export { default as ArrowForward } from './arrow_forward_ios.svg';
 export { default as ArrowBack } from './arrow_back_ios_new.svg';
 export { default as ArrowUp } from './arrow_upwards_ios.svg';
@@ -13,3 +14,4 @@ export { default as OnbLogin } from './onb_login.svg';
 export { default as OnbLost } from './onb_lost.svg';
 export { default as OnbMeditate } from './onb_meditate.svg';
 export { default as OnbRegister } from './onb_register.svg';
+export { default as PaperPlane } from './paperplane.fill.svg';
