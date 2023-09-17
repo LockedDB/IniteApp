@@ -1,14 +1,12 @@
 import { CustomText } from '@/components/CustomText';
 import { Divider } from '@/components/Divider';
-import { Button, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import AddTopicButton from './AddTopicButton/AddTopicButton';
 import ProjectCardFooter from './ProjectCardFooter/ProjectCardFooter';
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
 import { PROJECT_DETAILS_SCREEN } from '@/modules/navigation/paths';
 import { GenericNavigation } from '@/modules/navigation/types';
-import { useState } from 'react';
-import { BottomSheet } from '@/components/BottomSheet/BottomSheet';
 import { Project } from '@/Models/project';
 import { dispatchDeleteProject } from '@/modules/Project/Redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,6 +16,8 @@ import { getTopicByProjectId } from '@/modules/Topic/Redux/selectors';
 import { StoreState } from '@/reducers/reducers';
 import { TopicNameList } from './TopicNameList/TopicNameList';
 import { TagList } from '@/components/TagList/TagList';
+import { OptionsBottomSheet } from '@/components/BottomSheet/components/OptionsBottomSheet';
+import { useBottomSheetMethods } from '@/components/BottomSheet/hooks/useBottomSheetMethods';
 
 interface ProjectCardProps {
   item: Project;
@@ -29,7 +29,7 @@ const AnimatedTouchableOpacity =
 export const ProjectCard = ({ item }: ProjectCardProps) => {
   const { push } = useNavigation<GenericNavigation>();
   const dispatch = useDispatch();
-  const [isOpen, setOpen] = useState(false);
+  const { onToggle, setOpen, isOpen } = useBottomSheetMethods();
   const topics = useSelector((state: StoreState) =>
     getTopicByProjectId(state, item.id),
   );
@@ -86,10 +86,12 @@ export const ProjectCard = ({ item }: ProjectCardProps) => {
         </TouchableOpacity>
       </View>
 
-      <BottomSheet isOpen={isOpen} onToggle={() => setOpen(!isOpen)}>
-        <Button title="Edit" onPress={onEdit} />
-        <Button title="Remove" onPress={onRemove} />
-      </BottomSheet>
+      <OptionsBottomSheet
+        isOpen={isOpen}
+        onToggle={onToggle}
+        onRename={onEdit}
+        onDelete={onRemove}
+      />
 
       {/* Footer */}
       <ProjectCardFooter />

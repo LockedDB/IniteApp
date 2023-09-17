@@ -116,7 +116,12 @@ export const ProjectDetailsScreen = () => {
         onSubmit={onSubmit}
       />
 
-      <OptionsBottomSheet isOpen={isOpen} onToggle={onToggle} />
+      <OptionsBottomSheet
+        isOpen={isOpen}
+        onToggle={onToggle}
+        onRename={() => {}}
+        onDelete={() => {}}
+      />
 
       <LoadingComponent isLoading={isLoading} />
     </CustomSafeAreaView>

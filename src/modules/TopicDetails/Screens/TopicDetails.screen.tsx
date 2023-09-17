@@ -108,7 +108,12 @@ export const TopicDetailScreen = ({}: TopicDetailScreenProps) => {
           </TouchableOpacity>
         </View>
       </BottomSheet>
-      <OptionsBottomSheet isOpen={isOptionsOpen} onToggle={onToggleOptions} />
+      <OptionsBottomSheet
+        isOpen={isOptionsOpen}
+        onToggle={onToggleOptions}
+        onRename={() => {}}
+        onDelete={() => {}}
+      />
     </Fragment>
   );
 };
