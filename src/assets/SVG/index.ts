@@ -20,3 +20,4 @@ export { default as Picture } from './picture.svg';
 export { default as Mic } from './mic.fill.svg';
 export { default as Doc } from './doc.fill.svg';
 export { default as ImagePlaceholder } from './image_placeholder.svg';
+export { default as NoData } from './no_data.svg';

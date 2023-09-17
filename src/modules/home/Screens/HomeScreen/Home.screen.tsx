@@ -6,7 +6,7 @@ import { useBlurModal } from '@/components/BlurModal';
 import { CustomText } from '@/components/CustomText';
 import styles from './styles';
 import { FlatList, TouchableOpacity, View } from 'react-native';
-import { Menu } from '@/assets/SVG';
+import { Menu, NoData } from '@/assets/SVG';
 import { ListFooter, ProjectCard } from '@/modules/home/Components';
 import React from 'react';
 import { TopBar } from '@/components/TopBar';
@@ -18,6 +18,7 @@ import { DrawerActions, useNavigation } from '@react-navigation/native';
 import { GenericNavigation } from '@/modules/navigation/types';
 import { useDispatch } from 'react-redux';
 import { dispatchCreateProject } from '@/modules/Project/Redux/actions';
+import Animated, { FadeInDown, FadeInUp } from 'react-native-reanimated';
 
 const Title = () => (
   <CustomText fontStyle="black" style={styles.title}>
@@ -72,6 +73,28 @@ export const HomeScreen = () => {
         showsVerticalScrollIndicator={false}
         keyExtractor={item => item.id}
         contentContainerStyle={styles.contentList}
+        ListEmptyComponent={
+          <View>
+            <Animated.View
+              entering={FadeInUp.delay(200).duration(1000).springify()}
+              style={{ flex: 1, alignSelf: 'center' }}>
+              <NoData width={240} height={240} />
+            </Animated.View>
+            <Animated.Text
+              entering={FadeInDown.delay(400).duration(1000).springify()}
+              style={{
+                opacity: 0.5,
+                marginTop: 16,
+                fontSize: 20,
+                color: 'white',
+                textAlign: 'center',
+              }}>
+              {
+                "Things are looking pretty empty here! Let's create a project already!"
+              }
+            </Animated.Text>
+          </View>
+        }
       />
 
       <ListFooter onPress={onOpenModal} />

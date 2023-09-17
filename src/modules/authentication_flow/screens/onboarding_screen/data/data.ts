@@ -17,7 +17,6 @@ export const REGISTER_DATA = {
   title: 'Welcome',
   description: 'To register for an account, kindly enter your details',
 };
-
 export const NEW_USER_DATA = {
   title: 'Set Up Your Profile',
   description:
