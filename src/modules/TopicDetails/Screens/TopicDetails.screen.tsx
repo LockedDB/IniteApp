@@ -1,21 +1,29 @@
 import { Chat, TopicDetailsFooter, TopicDetailsHeader } from '../Components';
-import { TouchableOpacity, View } from 'react-native';
+import {
+  KeyboardAvoidingView,
+  SafeAreaView,
+  TouchableOpacity,
+  useWindowDimensions,
+  View,
+} from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { GenericNavigation, ScreenRouteType } from '@/modules/navigation/types';
-import { CustomSafeAreaView } from '@/components/CustomSafeAreaView';
 import { TopBar } from '@/components/TopBar';
 import { Close, Doc, Mic, MoreVertical, Picture } from '@/assets/SVG';
 import { Divider } from '@/components/Divider';
 import { TOPICS_DETAILS_SCREEN } from '@/modules/navigation/paths';
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { BottomSheet } from '@/components/BottomSheet/BottomSheet';
 import { CustomText } from '@/components/CustomText';
 import { useBottomSheetMethods } from '@/components/BottomSheet/hooks/useBottomSheetMethods';
 import { OptionsBottomSheet } from '@/components/BottomSheet/components/OptionsBottomSheet';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 interface TopicDetailScreenProps {}
 
 export const TopicDetailScreen = ({}: TopicDetailScreenProps) => {
+  const dimensions = useWindowDimensions();
+  const { bottom } = useSafeAreaInsets();
   const {
     params: { id },
   } = useRoute<ScreenRouteType<typeof TOPICS_DETAILS_SCREEN>>();
@@ -33,27 +41,32 @@ export const TopicDetailScreen = ({}: TopicDetailScreenProps) => {
   }
 
   return (
-    <CustomSafeAreaView>
-      <View style={{ paddingHorizontal: 16 }}>
-        <TopBar
-          leftComponent={
-            <TouchableOpacity onPress={goBack}>
-              <Close />
-            </TouchableOpacity>
-          }
-          rightComponent={
-            <TouchableOpacity onPress={() => setOptionsOpen(true)}>
-              <MoreVertical />
-            </TouchableOpacity>
-          }
-        />
-      </View>
-      <TopicDetailsHeader />
-      <Divider />
+    <Fragment>
+      <KeyboardAvoidingView behavior="position" style={{ flex: 1 }}>
+        <SafeAreaView
+          style={{ flex: 1, minHeight: dimensions.height - bottom }}>
+          <View style={{ paddingHorizontal: 16 }}>
+            <TopBar
+              leftComponent={
+                <TouchableOpacity onPress={goBack}>
+                  <Close />
+                </TouchableOpacity>
+              }
+              rightComponent={
+                <TouchableOpacity onPress={() => setOptionsOpen(true)}>
+                  <MoreVertical />
+                </TouchableOpacity>
+              }
+            />
+          </View>
+          <TopicDetailsHeader />
+          <Divider />
 
-      <Chat topicId={id} />
+          <Chat topicId={id} />
 
-      <TopicDetailsFooter setOpen={setAttachmentsOpen} topicId={id} />
+          <TopicDetailsFooter setOpen={setAttachmentsOpen} topicId={id} />
+        </SafeAreaView>
+      </KeyboardAvoidingView>
 
       <BottomSheet
         height={200}
@@ -95,8 +108,7 @@ export const TopicDetailScreen = ({}: TopicDetailScreenProps) => {
           </TouchableOpacity>
         </View>
       </BottomSheet>
-
       <OptionsBottomSheet isOpen={isOptionsOpen} onToggle={onToggleOptions} />
-    </CustomSafeAreaView>
+    </Fragment>
   );
 };
