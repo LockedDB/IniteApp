@@ -11,6 +11,7 @@ import {
 } from '@/modules/TopicDetails/selectors';
 import LoadingComponent from '@/components/LoadingComponent/LoadingComponent';
 import { Messages } from '@/Models/message';
+import { Fragment } from 'react';
 
 interface Props {
   topicId: string;
@@ -63,11 +64,13 @@ export const Chat = ({ topicId }: Props) => {
   );
 
   return (
-    <FlatList
-      data={messagedMocked}
-      style={styles.container}
-      contentContainerStyle={styles.content}
-      renderItem={renderItem}
-    />
+    <Fragment>
+      <FlatList
+        data={messagedMocked}
+        style={styles.container}
+        contentContainerStyle={styles.content}
+        renderItem={renderItem}
+      />
+    </Fragment>
   );
 };

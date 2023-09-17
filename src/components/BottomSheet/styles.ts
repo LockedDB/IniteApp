@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { HEIGHT, OVERDRAG } from '@/components/BottomSheet/consts';
+import { Black } from '@/utils/colors';
 
 export default StyleSheet.create({
   container: {
@@ -7,8 +8,9 @@ export default StyleSheet.create({
     backgroundColor: 'white',
   },
   sheet: {
-    backgroundColor: 'white',
+    backgroundColor: Black,
     padding: 16,
+    paddingTop: 0,
     height: HEIGHT,
     width: '100%',
     position: 'absolute',

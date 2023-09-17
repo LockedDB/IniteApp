@@ -1,5 +1,5 @@
 import { PropsWithChildren, useEffect } from 'react';
-import { Pressable } from 'react-native';
+import { Pressable, View } from 'react-native';
 import styles from './styles';
 import Animated, {
   FadeIn,
@@ -21,11 +21,13 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 interface BottomSheetProps {
   isOpen: boolean;
   onToggle: () => void;
+  height?: number;
 }
 
 export const BottomSheet = ({
   isOpen,
   onToggle,
+  height,
   children,
 }: PropsWithChildren<BottomSheetProps>) => {
   const offset = useSharedValue(0);
@@ -66,9 +68,20 @@ export const BottomSheet = ({
       />
       <GestureDetector gesture={pan}>
         <Animated.View
-          style={[styles.sheet, translateY]}
+          style={[styles.sheet, translateY, { height }]}
           entering={SlideInDown.springify().damping(15)}
           exiting={SlideOutDown}>
+          <View
+            style={{
+              width: 50,
+              height: 3,
+              borderRadius: 24,
+              alignSelf: 'center',
+              backgroundColor: 'white',
+              marginTop: 8,
+              marginBottom: 8,
+            }}
+          />
           {children}
         </Animated.View>
       </GestureDetector>

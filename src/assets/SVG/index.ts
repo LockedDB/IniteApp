@@ -15,3 +15,6 @@ export { default as OnbLost } from './onb_lost.svg';
 export { default as OnbMeditate } from './onb_meditate.svg';
 export { default as OnbRegister } from './onb_register.svg';
 export { default as PaperPlane } from './paperplane.fill.svg';
+export { default as Picture } from './picture.svg';
+export { default as Mic } from './mic.fill.svg';
+export { default as Doc } from './doc.fill.svg';

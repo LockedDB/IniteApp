@@ -1,14 +1,18 @@
 import { TextInput, TouchableOpacity, View } from 'react-native';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { saveMessageRequest } from '@/modules/TopicDetails/slice';
 import { AddAttachment, PaperPlane } from '@/assets/SVG';
 
 interface TopicDetailsFooterProps {
   topicId: string;
+  setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-export const TopicDetailsFooter = ({ topicId }: TopicDetailsFooterProps) => {
+export const TopicDetailsFooter = ({
+  topicId,
+  setOpen,
+}: TopicDetailsFooterProps) => {
   const dispatch = useDispatch();
   const [message, setMessage] = useState('');
 
@@ -18,7 +22,9 @@ export const TopicDetailsFooter = ({ topicId }: TopicDetailsFooterProps) => {
     setMessage('');
   }
 
-  function onAddAttachment() {}
+  function onAddAttachment() {
+    setOpen(true);
+  }
 
   return (
     <View
