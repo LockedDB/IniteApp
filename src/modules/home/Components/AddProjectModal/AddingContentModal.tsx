@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TextInput, TouchableOpacity, View } from 'react-native';
 import styles from './styles';
 import { Black, White300 } from '@/utils/colors';
@@ -35,6 +35,13 @@ export const AddingContentModal = ({
     props.onClose();
     onSubmit(name, description);
   };
+
+  useEffect(() => {
+    return () => {
+      setName('');
+      setDescription('');
+    };
+  }, [props.isVisible]);
 
   return (
     <BlurModal {...props} style={styles.modal} withCloseButton>
