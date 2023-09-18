@@ -2,7 +2,6 @@ import { CustomText } from '@/components/CustomText';
 import { Divider } from '@/components/Divider';
 import { TouchableOpacity, View } from 'react-native';
 import AddTopicButton from './AddTopicButton/AddTopicButton';
-import ProjectCardFooter from './ProjectCardFooter/ProjectCardFooter';
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
 import { PROJECT_DETAILS_SCREEN } from '@/modules/navigation/paths';
@@ -92,9 +91,6 @@ export const ProjectCard = ({ item }: ProjectCardProps) => {
         onRename={onEdit}
         onDelete={onRemove}
       />
-
-      {/* Footer */}
-      <ProjectCardFooter />
     </AnimatedTouchableOpacity>
   );
 };

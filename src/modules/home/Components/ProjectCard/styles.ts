@@ -15,8 +15,7 @@ export default StyleSheet.create({
     padding: 16,
     paddingBottom: 0,
     backgroundColor: EerieBlack,
-    borderTopLeftRadius: 8,
-    borderTopRightRadius: 8,
+    borderRadius: 8,
   },
   topCard: {
     width: '100%',

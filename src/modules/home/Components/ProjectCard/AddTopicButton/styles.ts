@@ -1,21 +1,18 @@
-import { White } from '@/utils/colors';
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   container: {
-    width: '100%',
     padding: 16,
     paddingLeft: 0,
   },
   touchable: {
-    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-
     gap: 8,
+    width: '95%',
   },
   buttonText: {
     fontSize: 16,
-    color: White,
+    color: 'white',
   },
 });

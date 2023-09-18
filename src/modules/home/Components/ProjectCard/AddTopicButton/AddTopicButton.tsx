@@ -1,5 +1,4 @@
 import { CustomText } from '@/components/CustomText';
-import { White700 } from '@/utils/colors';
 import { Add } from '@/assets/SVG';
 import { useState } from 'react';
 import { TextInput, TouchableOpacity, View } from 'react-native';
@@ -65,7 +64,7 @@ const AddTopicButton = ({ projectId }: Props) => {
               onChangeText={value => setTopicName(value)}
               onSubmitEditing={onSubmit}
               style={styles.buttonText}
-              placeholderTextColor={White700}
+              placeholderTextColor="white"
               autoFocus
             />
           </View>
