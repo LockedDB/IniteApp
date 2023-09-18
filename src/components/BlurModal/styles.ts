@@ -9,7 +9,7 @@ export default StyleSheet.create({
   },
   blur: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0,0,0,0.8)',
+    backgroundColor: 'rgba(0,0,0,0.9)',
     zIndex: 1,
   },
 });

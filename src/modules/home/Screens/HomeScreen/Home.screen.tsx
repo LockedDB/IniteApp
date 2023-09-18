@@ -5,8 +5,8 @@ import {
 import { useBlurModal } from '@/components/BlurModal';
 import { CustomText } from '@/components/CustomText';
 import styles from './styles';
-import { FlatList, TouchableOpacity, View } from 'react-native';
-import { Menu, NoData } from '@/assets/SVG';
+import { FlatList, Image, TouchableOpacity, View } from 'react-native';
+import { NoData } from '@/assets/SVG';
 import { ProjectCard } from '@/modules/home/Components';
 import React from 'react';
 import { TopBar } from '@/components/TopBar';
@@ -21,6 +21,8 @@ import { dispatchCreateProject } from '@/modules/Project/Redux/actions';
 import Animated, { FadeInDown, FadeInUp } from 'react-native-reanimated';
 import PrimaryButton from '@/modules/authentication_flow/screens/onboarding_screen/components/PrimaryButton';
 
+const testImage = require('../../../../assets/png/test_user.png');
+
 const Title = () => (
   <CustomText fontStyle="black" style={styles.title}>
     Projects
@@ -29,7 +31,16 @@ const Title = () => (
 
 const MenuBar = ({ onPress }: { onPress: () => void }) => (
   <TouchableOpacity hitSlop={20} onPress={onPress}>
-    <Menu />
+    <Image
+      source={testImage}
+      style={{
+        width: 32,
+        height: 32,
+        borderRadius: 24,
+        borderColor: 'white',
+        borderWidth: 1,
+      }}
+    />
   </TouchableOpacity>
 );
 
