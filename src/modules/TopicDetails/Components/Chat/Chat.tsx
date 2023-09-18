@@ -4,7 +4,6 @@ import { ChatMessage } from '../ChatMessage/ChatMessage';
 import { useMountEffect } from '@/utils/utils';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMessagesRequest } from '@/modules/TopicDetails/slice';
-import { selectUserId } from '@/modules/authentication_flow/redux/profile/selectors';
 import {
   selectIsLoadingMessages,
   selectMessages,
@@ -19,7 +18,6 @@ interface Props {
 
 export const Chat = ({ topicId }: Props) => {
   const dispatch = useDispatch();
-  const uid = useSelector(selectUserId);
   const messages = useSelector(selectMessages);
   const loading = useSelector(selectIsLoadingMessages);
 
@@ -52,15 +50,8 @@ export const Chat = ({ topicId }: Props) => {
     },
   ] as Messages[];
 
-  const renderItem = ({
-    item: { sentBy, messageText },
-  }: {
-    item: Messages;
-  }) => (
-    <ChatMessage
-      from={sentBy === uid ? 'user' : 'other'}
-      textMessage={messageText}
-    />
+  const renderItem = ({ item: { messageText } }: { item: Messages }) => (
+    <ChatMessage textMessage={messageText} />
   );
 
   return (
