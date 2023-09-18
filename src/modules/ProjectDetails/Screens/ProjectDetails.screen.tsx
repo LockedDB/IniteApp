@@ -7,7 +7,6 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { GenericNavigation, ScreenRouteType } from '@/modules/navigation/types';
 import { CustomText } from '@/components/CustomText';
 import { TopBar } from '@/components/TopBar';
-import { Divider } from '@/components/Divider';
 import { useDispatch, useSelector } from 'react-redux';
 import { StoreState } from '@/reducers/reducers';
 import {
@@ -43,8 +42,6 @@ const ListHeader = ({ project }: { project: Project }) => (
         </View>
       )}
     </View>
-
-    <Divider />
 
     <View style={styles.listHeader}>
       <CustomText fontStyle="bold" style={styles.listTitle}>
@@ -102,6 +99,7 @@ export const ProjectDetailsScreen = () => {
         renderItem={renderItem}
         ListHeaderComponent={<ListHeader project={project} />}
         stickyHeaderIndices={[0]}
+        style={{ padding: 8 }}
         contentContainerStyle={styles.list}
       />
 

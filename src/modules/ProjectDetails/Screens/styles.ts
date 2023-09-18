@@ -7,8 +7,7 @@ export default StyleSheet.create({
   },
   header: {
     gap: 8,
-    marginTop: 8,
-    marginBottom: 16,
+    marginTop: 16,
   },
   title: {
     width: '80%',
@@ -28,6 +27,7 @@ export default StyleSheet.create({
   },
   listHeader: {
     paddingVertical: 16,
+    paddingBottom: 8,
     backgroundColor: Black,
   },
   listTitle: {
@@ -49,11 +49,10 @@ export default StyleSheet.create({
   item: {
     backgroundColor: EerieBlack,
     borderRadius: 8,
-    padding: 12,
+    padding: 16,
   },
   rowTitle: {
     fontSize: 16,
-    lineHeight: 18,
   },
   headerContainer: {
     paddingHorizontal: 8,
