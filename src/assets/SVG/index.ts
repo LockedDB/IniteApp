@@ -21,3 +21,6 @@ export { default as Mic } from './mic.fill.svg';
 export { default as Doc } from './doc.fill.svg';
 export { default as ImagePlaceholder } from './image_placeholder.svg';
 export { default as NoData } from './no_data.svg';
+export { default as Bell } from './bell.fill.svg';
+export { default as Exit } from './arrow.uturn.fill.svg';
+export { default as People } from './people.fill.svg';

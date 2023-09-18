@@ -4,6 +4,7 @@ import {
   INTRO_SCREEN_2,
   LOGIN_SCREEN,
   NEW_USER_PROFILE_SCREEN,
+  PROFILE_SCREEN,
   PROJECT_DETAILS_SCREEN,
   REGISTER_SCREEN,
   TOPICS_DETAILS_SCREEN,
@@ -27,6 +28,7 @@ export type ScreenList = {
   [WELCOME_SCREEN]: undefined;
   [INTRO_SCREEN_1]: undefined;
   [INTRO_SCREEN_2]: undefined;
+  [PROFILE_SCREEN]: undefined;
 };
 
 export type ScreenListKeys = keyof ScreenList;

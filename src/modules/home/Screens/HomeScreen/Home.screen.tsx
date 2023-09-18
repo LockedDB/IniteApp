@@ -14,12 +14,13 @@ import { CustomSafeAreaView } from '@/components/CustomSafeAreaView';
 import { AddingContentModal } from '@/modules/home/Components/AddProjectModal';
 import { Project } from '@/Models/project';
 import LoadingComponent from '@/components/LoadingComponent/LoadingComponent';
-import { DrawerActions, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { GenericNavigation } from '@/modules/navigation/types';
 import { useDispatch } from 'react-redux';
 import { dispatchCreateProject } from '@/modules/Project/Redux/actions';
 import Animated, { FadeInDown, FadeInUp } from 'react-native-reanimated';
 import PrimaryButton from '@/modules/authentication_flow/screens/onboarding_screen/components/PrimaryButton';
+import { PROFILE_SCREEN } from '@/modules/navigation/paths';
 
 const testImage = require('../../../../assets/png/test_user.png');
 
@@ -48,7 +49,7 @@ const Header = () => {
   const navigation = useNavigation<GenericNavigation>();
 
   const onMenuPressed = () => {
-    navigation.dispatch(DrawerActions.openDrawer());
+    navigation.navigate(PROFILE_SCREEN);
   };
 
   return (

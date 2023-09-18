@@ -1,6 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {
   HOME_SCREEN,
+  PROFILE_SCREEN,
   PROJECT_DETAILS_SCREEN,
   TOPICS_DETAILS_SCREEN,
 } from '@/modules/navigation/paths';
@@ -8,6 +9,7 @@ import { Black } from '@/utils/colors';
 import { ProjectDetailsScreen } from '@/modules/ProjectDetails/Screens/ProjectDetails.screen';
 import { TopicDetailScreen } from '@/modules/TopicDetails/Screens/TopicDetails.screen';
 import { HomeScreen } from '@/modules/home/Screens/HomeScreen/Home.screen';
+import { ProfileScreen } from '@/modules/profile/Profile.screen';
 
 const AppStack = createNativeStackNavigator();
 
@@ -26,6 +28,11 @@ export const AppNavigator = () => (
     <AppStack.Screen
       name={TOPICS_DETAILS_SCREEN}
       component={TopicDetailScreen}
+    />
+    <AppStack.Screen
+      name={PROFILE_SCREEN}
+      component={ProfileScreen}
+      options={{ presentation: 'modal' }}
     />
   </AppStack.Navigator>
 );
